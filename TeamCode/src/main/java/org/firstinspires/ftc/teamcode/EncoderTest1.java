@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "Test")
-public class Test extends LinearOpMode {
+@Autonomous(name = "Encoder test 1")
+public class EncoderTest1 extends LinearOpMode {
 
 
     private DcMotor leftFront;
@@ -19,7 +19,7 @@ public class Test extends LinearOpMode {
     private DcMotor wheelIntake1;
     private DcMotor wheelintake2;
 
-    //ENcoder Positions
+    //Encoder Positions
 
     private int leftFrontPos;
     private int rightFrontPos;

@@ -15,8 +15,8 @@ public class Teleop extends OpMode {
     private DcMotor rightBack = null;
     private DcMotor spinMotor = null;
 
-    private DcMotor wheelIntake1;
-    private DcMotor wheelintake2;
+    private DcMotor wheelIntake1 = null;
+    private DcMotor wheelintake2 = null;
 
     //servo
 
@@ -65,18 +65,13 @@ public class Teleop extends OpMode {
 
             //ATTACHMENT STUFF
 
-            if (gamepad1.dpad_up == true) {
+            if (gamepad2.left_bumper == true) {
                 spinMotor.setPower(0.25);
             }
-            if (gamepad1.dpad_down == true) {
+            if (gamepad2.right_bumper == true) {
                 spinMotor.setPower(-0.25);
             }
-            if (gamepad1.dpad_left == true) {
-                spinMotor.setPower(0.5);
-            }
-            if (gamepad1.dpad_right == true) {
-                spinMotor.setPower(-0.5);
-            }
+
 
 
             // (TEMP?) WHEEL ATTACHMENT
