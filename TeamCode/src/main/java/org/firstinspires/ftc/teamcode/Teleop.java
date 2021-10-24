@@ -1,12 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@TeleOp(name="Anoopteleop", group="Teleop")
+@TeleOp(name="Teleop", group="Teleop")
 public class Teleop extends OpMode {
 
     private DcMotor leftFront = null;
@@ -16,7 +15,7 @@ public class Teleop extends OpMode {
     private DcMotor spinMotor = null;
 
     private DcMotor wheelIntake1 = null;
-    private DcMotor wheelintake2 = null;
+    private DcMotor wheelIntake2 = null;
 
     //servo
 
@@ -29,7 +28,7 @@ public class Teleop extends OpMode {
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
         wheelIntake1 = hardwareMap.get(DcMotor.class, "wheelIntake1");
-        wheelintake2 = hardwareMap.get(DcMotor.class, "wheelintake2");
+        wheelIntake2 = hardwareMap.get(DcMotor.class, "wheelintake2");
 
 
     }
@@ -79,19 +78,19 @@ public class Teleop extends OpMode {
                 wheelIntake1.setPower(-.5);
             }
             if (gamepad2.dpad_up == true) {
-                wheelintake2.setPower(.5);
+                wheelIntake2.setPower(.5);
             }
             if (gamepad2.dpad_down == true) {
                 wheelIntake1.setPower(0.0);
             }
             if (gamepad2.dpad_down == true) {
-                wheelintake2.setPower(0.0);
+                wheelIntake2.setPower(0.0);
             }
             if (gamepad2.dpad_left == true) {
                 wheelIntake1.setPower(0.5);
             }
             if (gamepad2.dpad_left == true) {
-                wheelintake2.setPower(-0.5);
+                wheelIntake2.setPower(-0.5);
             }
 
             if (gamepad2.right_bumper == true) {

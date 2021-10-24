@@ -63,13 +63,18 @@ public class EncoderTest3 extends LinearOpMode {
         rightFront.setPower(0);
         leftBack.setPower(0);
         rightBack.setPower(0);
+        sleep(1000);
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         encoderDrive(1.0,  3,  3, 3, 3);  // S1: Forward 47 Inches with 5 Sec timeout
         encoderDrive(2.0,  -3,  -3, -3, -3);   // S2: Turn Right 12 Inches with 4 Sec timeout
         encoderDrive(3.0,  3,  3, 3, 3);   // S3: Reverse 24 Inches with 4 Sec timeout
 
-
+        sleep(1000);
+        leftFront.setPower(1);
+        rightFront.setPower(1);
+        leftBack.setPower(1);
+        rightBack.setPower(1);
         sleep(1000);
 
 
