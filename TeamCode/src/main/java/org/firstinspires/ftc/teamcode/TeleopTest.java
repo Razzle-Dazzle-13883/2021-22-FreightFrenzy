@@ -8,19 +8,19 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 
 @TeleOp(name="Teleop", group="Teleop")
-public class Teleop extends OpMode {
+public class TeleopTest extends OpMode {
 
-     DcMotor leftFront = null;
-     DcMotor rightFront = null;
-     DcMotor leftBack = null;
-     DcMotor rightBack = null;
-     DcMotor spinMotor = null;
-     DcMotor wheelIntake1 = null;
-     DcMotor wheelIntake2 = null;
+     DcMotor leftFront;
+     DcMotor rightFront;
+     DcMotor leftBack;
+     DcMotor rightBack;
+     DcMotor spinMotor;
+     DcMotor wheelIntake1;
+     DcMotor wheelIntake2;
 
     //servo
 
-    Servo claw = null;
+    Servo claw;
 
 
 
@@ -89,19 +89,26 @@ public class Teleop extends OpMode {
 
 
             //CLAW
-            if (gamepad2.dpad_left == true) {
+            if (gamepad1.dpad_up == true) {
                 claw.setPosition(1.0);
-            } else if (gamepad2.dpad_right == true) {
+            }
+            if (gamepad1.dpad_down == true) {
+                claw.setPosition(-1.0);
+            }
+            if (gamepad1.dpad_left == true) {
                 claw.setPosition(0);
             }
+            if (gamepad2.dpad_right == true) {
+                claw.setPosition(0.5);
+            }
 
 
-            // WHEEL ATTACHMENT
+            // (TEMP?) WHEEL ATTACHMENT
             if (gamepad2.dpad_up == true) {
-                wheelIntake1.setPower(-.7);
+                wheelIntake1.setPower(-.5);
             }
             if (gamepad2.dpad_up == true) {
-                wheelIntake2.setPower(.7);
+                wheelIntake2.setPower(.5);
             }
             if (gamepad2.dpad_down == true) {
                 wheelIntake1.setPower(0.0);
@@ -109,7 +116,19 @@ public class Teleop extends OpMode {
             if (gamepad2.dpad_down == true) {
                 wheelIntake2.setPower(0.0);
             }
-            
+            if (gamepad2.dpad_left == true) {
+                wheelIntake1.setPower(0.5);
+            }
+            if (gamepad2.dpad_left == true) {
+                wheelIntake2.setPower(-0.5);
+            }
+
+            if (gamepad2.right_bumper == true) {
+                leftBack.setPower(1.0);
+            }
+            if (gamepad2.left_bumper == true) {
+                leftBack.setPower(-1.0);
+            }
         }
     }
 

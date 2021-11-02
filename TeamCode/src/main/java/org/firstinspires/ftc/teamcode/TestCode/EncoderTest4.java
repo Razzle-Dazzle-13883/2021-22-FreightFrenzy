@@ -1,13 +1,12 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.TestCode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "Encoder test 1")
-public class EncoderTest1 extends LinearOpMode {
+@Autonomous(name = "Test")
+public class EncoderTest4 extends LinearOpMode {
 
 
     private DcMotor leftFront;
@@ -19,7 +18,7 @@ public class EncoderTest1 extends LinearOpMode {
     private DcMotor wheelIntake1;
     private DcMotor wheelintake2;
 
-    //Encoder Positions
+    //ENcoder Positions
 
     private int leftFrontPos;
     private int rightFrontPos;
