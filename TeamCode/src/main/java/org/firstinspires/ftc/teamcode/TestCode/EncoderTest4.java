@@ -5,25 +5,25 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name = "Test")
+@Autonomous(name = "WorkingEncoderMaybe")
 public class EncoderTest4 extends LinearOpMode {
 
 
-    private DcMotor leftFront;
-    private DcMotor rightFront;
-    private DcMotor leftBack;
-    private DcMotor rightBack;
-    private DcMotor spinMotor;
+     DcMotor leftFront;
+     DcMotor rightFront;
+     DcMotor leftBack;
+     DcMotor rightBack;
+     DcMotor spinMotor;
 
-    private DcMotor wheelIntake1;
-    private DcMotor wheelintake2;
+     DcMotor wheelIntake1;
+     DcMotor wheelintake2;
 
     //ENcoder Positions
 
-    private int leftFrontPos;
-    private int rightFrontPos;
-    private int leftBackPos;
-    private int rightBackPos;
+     int leftFrontPos;
+     int rightFrontPos;
+     int leftBackPos;
+     int rightBackPos;
 
 
     @Override
@@ -59,8 +59,8 @@ public class EncoderTest4 extends LinearOpMode {
         // the first number will move the leftfront wheel 1000 ticks, the 2nd will move the righfront wheel backwards 100 ticks, and so on
         //the last number, (0.25 in this case) will make them move at a speed of 0.25
 
-        drive(1000, 1000, -1000, 1000, 1.0);
-        drive(-1000, -1000, -1000, -1000, 1.0);
+        drive(538, 538, 538, 538, 1.0);
+        drive(-538, -538, -538, -538, 1.0);
     }
 
     private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {

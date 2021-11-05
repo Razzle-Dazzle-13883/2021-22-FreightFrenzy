@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-@TeleOp(name="Teleop", group="Teleop")
+@TeleOp(name="Teleop1")
 public class TeleopTest extends OpMode {
 
      DcMotor leftFront;
