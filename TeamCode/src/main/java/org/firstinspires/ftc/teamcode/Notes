@@ -1,5 +1,20 @@
+CONTROL HUB
+DCMOTOR PORT 1 - leftFront
+DCMOTOR PORT 2 - leftBack
+DCMOTOR PORT 3 - rightFront
+DCMOTOR PORT 4 - rightBack
+
+EXPANSION HUB
+DCMOTOR PORT 1 - spinMotor
+DCMOTOR PORT 2 -
+DCMOTOR PORT 3
+DCMOTOR PORT 4 - slideMotor
+
+
 
 Auto:
+
+Edit the list when Auto is actualy working
 
 1) Blue Side Robot Position 1 Duck Position 1
 2) Blue Side Robot Position 1 Duck Position 2
@@ -40,7 +55,8 @@ Servo Position 2
 
 
 VUFORIA KEY FOR 21-22
-
 AQ5Ga0r/////AAABmY3dPUqJZE+9lWYfmEZA8GxAAge/a1bHQ8udF/kH7f+UjIKGtq1629AE2grZt0+aJjE2DUw3Vd7X6lP23pVERIZtyIHHEqjz5/6o2Fvnjh0Hi3Bc34cG8W8JBoxzq8PDJ6ucRNP83vFx4dyaBuu/S3Il+YyDbTPnMC0eGdjWMyolP9d82QW2b/rsrJln8qnQIoI0qBV2YbUrV/5xyNZ9f+eyOhk3X/hgNsRKFoexNZERZbYxEU3d37adTXMMY6m2msmOP+H9/PLpgMMe1hRfrQbL+iNmLPVZqPZaRevhDFa57biNixyRuH8wERJlHI49BvrNeGshYa7yaQnNU7eGjSiyZt6DvopUXWXiyIqlcuM6
 
 
+https://www.gobilda.com/strafer-chassis-kit-v3/
+https://github.com/FIRST-Tech-Challenge/FtcRobotController/wiki/Using-a-Custom-TensorFlow-Model-with-Java

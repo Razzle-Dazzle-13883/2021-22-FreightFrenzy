@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name="Teleop", group="Teleop")
 public class Teleop extends OpMode {
 
+     //motors
      DcMotor leftFront = null;
      DcMotor rightFront = null;
      DcMotor leftBack = null;
@@ -17,36 +18,40 @@ public class Teleop extends OpMode {
      DcMotor spinMotor = null;
      DcMotor wheelIntake1 = null;
      DcMotor wheelIntake2 = null;
+     DcMotor slideMotor = null;
 
     //servo
-
     Servo claw = null;
 
+    public boolean turboMode = true;
 
 
     @Override
     public void init() {
+
         leftFront = hardwareMap.get(DcMotor.class, "leftFront");
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
         wheelIntake1 = hardwareMap.get(DcMotor.class, "wheelIntake1");
         wheelIntake2 = hardwareMap.get(DcMotor.class, "wheelintake2");
-
-        claw = hardwareMap.get(Servo.class, "claw");
-        claw.setPosition(0.0);
+        slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
 
         leftFront.setPower(0);
         rightFront.setPower(0);
         rightBack.setPower(0);
         leftBack.setPower(0);
         spinMotor.setPower(0);
+        wheelIntake1.setPower(0);
+        wheelIntake2.setPower(0);
+        slideMotor.setPower(0);
 
+        claw = hardwareMap.get(Servo.class, "claw");
+        claw.setPosition(0.0);
     }
 
-
-    public boolean turboMode = true;
 
 
     @Override
@@ -77,7 +82,6 @@ public class Teleop extends OpMode {
                 turboMode = false;
             }
 
-            //ATTACHMENT STUFF
 
             //Carasol mover
             if (gamepad2.left_bumper == true) {
@@ -96,6 +100,7 @@ public class Teleop extends OpMode {
             }
 
 
+
             // WHEEL ATTACHMENT
             if (gamepad2.dpad_up == true) {
                 wheelIntake1.setPower(-.7);
@@ -109,7 +114,7 @@ public class Teleop extends OpMode {
             if (gamepad2.dpad_down == true) {
                 wheelIntake2.setPower(0.0);
             }
-            
+
         }
     }
 
