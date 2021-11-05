@@ -10,15 +10,16 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name="Teleop", group="Teleop")
 public class Teleop extends OpMode {
 
-     //motors
-     DcMotor leftFront = null;
-     DcMotor rightFront = null;
-     DcMotor leftBack = null;
-     DcMotor rightBack = null;
-     DcMotor spinMotor = null;
-     DcMotor wheelIntake1 = null;
-     DcMotor wheelIntake2 = null;
-     DcMotor slideMotor = null;
+    //motors
+    DcMotor leftFront = null;
+    DcMotor rightFront = null;
+    DcMotor leftBack = null;
+    DcMotor rightBack = null;
+
+    DcMotor spinMotor = null;
+    DcMotor slideMotor = null;
+    DcMotor wheelIntake1 = null;
+    DcMotor wheelIntake2 = null;
 
     //servo
     Servo claw = null;
@@ -53,7 +54,6 @@ public class Teleop extends OpMode {
     }
 
 
-
     @Override
     public void loop() {
 
@@ -71,8 +71,6 @@ public class Teleop extends OpMode {
             leftBack.setPower((x - y + r) / 3.7);
             rightFront.setPower((x - y - r) / 3.7);
             rightBack.setPower((x + y - r) / 3.7);
-
-
 
 
             //Fastmode and slowmode
@@ -97,26 +95,33 @@ public class Teleop extends OpMode {
                 claw.setPosition(1.0);
             } else if (gamepad2.dpad_right == true) {
                 claw.setPosition(0);
-            }
+            } else if (gamepad2.dpad_up == true) {
+                claw.setPosition(-1);
 
+                //Linear Slide
+                if (gamepad2.left_stick_y > 0.3) {
+                    slideMotor.setPower(0.65);
+                }
+                if (gamepad2.left_stick_y < 0.3) {
+                    slideMotor.setPower(0);
+                }
 
+                // WHEEL ATTACHMENT
+                if (gamepad2.dpad_up == true) {
+                    wheelIntake1.setPower(-.7);
+                }
+                if (gamepad2.dpad_up == true) {
+                    wheelIntake2.setPower(.7);
+                }
+                if (gamepad2.dpad_down == true) {
+                    wheelIntake1.setPower(0.0);
+                }
+                if (gamepad2.dpad_down == true) {
+                    wheelIntake2.setPower(0.0);
+                }
 
-            // WHEEL ATTACHMENT
-            if (gamepad2.dpad_up == true) {
-                wheelIntake1.setPower(-.7);
             }
-            if (gamepad2.dpad_up == true) {
-                wheelIntake2.setPower(.7);
-            }
-            if (gamepad2.dpad_down == true) {
-                wheelIntake1.setPower(0.0);
-            }
-            if (gamepad2.dpad_down == true) {
-                wheelIntake2.setPower(0.0);
-            }
-
         }
+
     }
-
 }
-
