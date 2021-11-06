@@ -98,12 +98,37 @@ public class Teleop extends OpMode {
                 claw.setPosition(1.0);
             }
 
+            //Linear Slide
             if (gamepad2.left_stick_y > 0.3) {
-                slideMotor.setPower(0.65);
+                slideMotor.setPower(0.0);
             }
-            if (gamepad2.left_stick_y < 0.3) {
-                slideMotor.setPower(0);
+            if (gamepad2.left_stick_y == 0.3) {
+                slideMotor.setPower(0.3);
             }
+            if (gamepad2.left_stick_y == 0.4) {
+                slideMotor.setPower(0.4);
+            }
+            if (gamepad2.left_stick_y == 0.5){
+                slideMotor.setPower(0.5);
+            }
+            if (gamepad2.left_stick_y == 0.6){
+                slideMotor.setPower(0.6);
+            }
+            if (gamepad2.left_stick_y == 0.7){
+                slideMotor.setPower(0.7);
+            }
+            if (gamepad2.left_stick_y == 0.8){
+                slideMotor.setPower(0.8);
+            }
+            if (gamepad2.left_stick_y == 0.9){
+                slideMotor.setPower(0.9);
+            }
+            if (gamepad2.left_stick_y == 1.0){
+                slideMotor.setPower(1);
+            }
+
+
+
             // WHEEL ATTACHMENT
             if (gamepad2.dpad_up == true) {
                 wheelIntake1.setPower(-.7);
