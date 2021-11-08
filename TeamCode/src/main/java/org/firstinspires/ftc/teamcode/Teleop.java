@@ -20,6 +20,7 @@ public class Teleop extends OpMode {
     DcMotor slideMotor = null;
     DcMotor wheelIntake1 = null;
     DcMotor wheelIntake2 = null;
+    DcMotor movingClaw = null;
 
     //servo
     public Servo claw = null;
@@ -37,8 +38,8 @@ public class Teleop extends OpMode {
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
 
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
-        wheelIntake1 = hardwareMap.get(DcMotor.class, "wheelIntake1");
-        wheelIntake2 = hardwareMap.get(DcMotor.class, "wheelintake2");
+        movingClaw = hardwareMap.get(DcMotor.class, "movingClaw");
+        //wheelIntake2 = hardwareMap.get(DcMotor.class, "wheelintake2");
         slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
 
         leftFront.setPower(0);
@@ -49,6 +50,9 @@ public class Teleop extends OpMode {
         wheelIntake1.setPower(0);
         wheelIntake2.setPower(0);
         slideMotor.setPower(0);
+
+        rightFront.setDirection(DcMotor.Direction.REVERSE);
+        rightBack.setDirection(DcMotor.Direction.REVERSE);
 
         claw = hardwareMap.get(Servo.class, "claw");
         claw.setPosition(0.0);
@@ -87,19 +91,19 @@ public class Teleop extends OpMode {
                 spinMotor.setPower(0);
             }
             if (gamepad2.right_bumper == true) {
-                spinMotor.setPower(1);
+                spinMotor.setPower(.25);
             }
 
 
             //claw
-            if (gamepad2.y == true) {
+            if (gamepad2.x == true) {
                 claw.setPosition(0.0);
-            } else if (gamepad2.a == true) {
+            } else if (gamepad2.b == true) {
                 claw.setPosition(1.0);
             }
 
             //Linear Slide
-            if (gamepad2.left_stick_y > 0.3) {
+            if (gamepad2.left_stick_y < 0.3) {
                 slideMotor.setPower(0.0);
             }
             if (gamepad2.left_stick_y == 0.3) {
@@ -142,7 +146,44 @@ public class Teleop extends OpMode {
             if (gamepad2.dpad_down == true) {
                 wheelIntake2.setPower(0.0);
             }
+            if (gamepad2.dpad_left== true) {
+                wheelIntake1.setPower(-1);
+            }
+            if (gamepad2.dpad_left == true) {
+                wheelIntake2.setPower(1);
+            }
 
 
+            //movingClaw
+        if (gamepad2.right_stick_y < 0.4) {
+            movingClaw.setPower(0.0);
+        }
+        if (gamepad2.right_stick_y == 0.5) {
+            movingClaw.setPower(0.3);
+        }
+        if (gamepad2.right_stick_y == 0.6) {
+            movingClaw.setPower(0.6);
+        }
+        if (gamepad2.right_stick_y == 0.7){
+            movingClaw.setPower(0.7);
+        }
+        if (gamepad2.right_stick_y > 0.7){
+            movingClaw.setPower(1);
+        }
+        if (gamepad2.right_stick_y < -0.4) {
+            movingClaw.setPower(0.0);
+        }
+        if (gamepad2.right_stick_y == -0.5) {
+            movingClaw.setPower(-0.3);
+        }
+        if (gamepad2.right_stick_y == -0.6) {
+            movingClaw.setPower(-0.6);
+        }
+        if (gamepad2.right_stick_y == -0.7){
+            movingClaw.setPower(-0.7);
+        }
+        if (gamepad2.right_stick_y > -0.7){
+            movingClaw.setPower(-1);
+        }
     }
 }
