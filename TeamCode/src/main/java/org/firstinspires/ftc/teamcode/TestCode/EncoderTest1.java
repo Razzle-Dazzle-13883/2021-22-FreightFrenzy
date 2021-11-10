@@ -2,12 +2,15 @@
 package org.firstinspires.ftc.teamcode.TestCode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@Autonomous(name="Encoder test 3", group="Pushbot")
+@Autonomous(name="Encoder test 3")
+@Disabled
+
 public class EncoderTest1 extends LinearOpMode {
 
     private ElapsedTime     runtime = new ElapsedTime();

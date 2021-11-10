@@ -7,41 +7,12 @@ DCMOTOR PORT 4 - rightBack
 EXPANSION HUB
 DCMOTOR PORT 1 - spinMotor
 DCMOTOR PORT 2 -
-DCMOTOR PORT 3
+DCMOTOR PORT 3 - movingClaw
 DCMOTOR PORT 4 - slideMotor
 
 
 
 Auto:
-
-Edit the list when Auto is actualy working
-
-1) Blue Side Robot Position 1 Duck Position 1
-2) Blue Side Robot Position 1 Duck Position 2
-3) Blue Side Robot Position 1 Duck Position 3
-4) Blue Side Robot Position 2 Duck Position 1
-5) Blue Side Robot Position 2 Duck Position 2
-6) Blue Side Robot Position 2 Duck Position 3
-7) Red Side Robot Position 1 Duck Position 1
-8) Red Side Robot Position 1 Duck Position 2
-9) Red Side Robot Position 1 Duck Position 3
-10) Red Side Robot Position 2 Duck Position 1
-11) Red Side Robot Position 2 Duck Position 2
-12) Red Side Robot Position 2 Duck Position 3
-
-1) 2) 3) go together
-   -put cube in right spot
-   -Carosul
-   -Go to Storage
-4) 5) 6) go together
-
-7) 8) 9) go together
-    -put cube in right spot
-    -Carosul
-    -Go to Storage
-10) 11) 12) go together
-
-
 
 TELEOP
 
