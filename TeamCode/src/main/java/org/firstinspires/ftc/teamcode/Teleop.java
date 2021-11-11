@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-@TeleOp(name="TeleopForMainBot", group="Teleop")
+@TeleOp(name="TeleopForMainBot")
 public class Teleop extends OpMode {
 
     //motors
