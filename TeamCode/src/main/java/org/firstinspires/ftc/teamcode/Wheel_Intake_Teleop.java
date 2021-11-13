@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-@TeleOp(name="TeleopForMainBot")
-public class Teleop extends OpMode {
+@TeleOp(name="TeleopIntake")
+public class Wheel_Intake_Teleop extends OpMode {
 
     //motors
     DcMotor leftFront = null;
@@ -17,13 +17,10 @@ public class Teleop extends OpMode {
     DcMotor rightBack = null;
 
     DcMotor spinMotor = null;
-    DcMotor slideMotor = null;
     DcMotor wheelIntake1 = null;
     DcMotor wheelIntake2 = null;
-    DcMotor movingClaw = null;
 
-    //servo
-    public Servo claw = null;
+
 
 
     public boolean turboMode = true;
@@ -38,9 +35,9 @@ public class Teleop extends OpMode {
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
 
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
-        movingClaw = hardwareMap.get(DcMotor.class, "movingClaw");
+        wheelIntake1 = hardwareMap.get(DcMotor.class, "wheelintake1");
         wheelIntake2 = hardwareMap.get(DcMotor.class, "wheelintake2");
-        slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
+
 
         leftFront.setPower(0);
         rightFront.setPower(0);
@@ -49,17 +46,13 @@ public class Teleop extends OpMode {
         spinMotor.setPower(0);
         wheelIntake1.setPower(0);
         wheelIntake2.setPower(0);
-        slideMotor.setPower(0);
 
         rightFront.setDirection(DcMotor.Direction.REVERSE);
         rightBack.setDirection(DcMotor.Direction.REVERSE);
 
-        claw = hardwareMap.get(Servo.class, "claw");
-        claw.setPosition(0.0);
 
     }
-
-    @Override
+   @Override
     public void loop() {
 
         //strafing stuff + Turbomode stuff
@@ -97,39 +90,9 @@ public class Teleop extends OpMode {
 
             //claw
             if (gamepad2.x == true) {
-                claw.setPosition(0.0);
             } else if (gamepad2.b == true) {
-                claw.setPosition(1.0);
             }
 
-            //Linear Slide
-            if (gamepad2.left_stick_y < 0.3) {
-                slideMotor.setPower(0.0);
-            }
-            if (gamepad2.left_stick_y == 0.3) {
-                slideMotor.setPower(0.3);
-            }
-            if (gamepad2.left_stick_y == 0.4) {
-                slideMotor.setPower(0.4);
-            }
-            if (gamepad2.left_stick_y == 0.5){
-                slideMotor.setPower(0.5);
-            }
-            if (gamepad2.left_stick_y == 0.6){
-                slideMotor.setPower(0.6);
-            }
-            if (gamepad2.left_stick_y == 0.7){
-                slideMotor.setPower(0.7);
-            }
-            if (gamepad2.left_stick_y == 0.8){
-                slideMotor.setPower(0.8);
-            }
-            if (gamepad2.left_stick_y == 0.9){
-                slideMotor.setPower(0.9);
-            }
-            if (gamepad2.left_stick_y == 1.0){
-                slideMotor.setPower(1);
-            }
 
 
 
@@ -154,36 +117,5 @@ public class Teleop extends OpMode {
             }
 
 
-            //movingClaw
-        if (gamepad2.right_stick_y < 0.4) {
-            movingClaw.setPower(0.0);
-        }
-        if (gamepad2.right_stick_y == 0.5) {
-            movingClaw.setPower(0.3);
-        }
-        if (gamepad2.right_stick_y == 0.6) {
-            movingClaw.setPower(0.6);
-        }
-        if (gamepad2.right_stick_y == 0.7){
-            movingClaw.setPower(0.7);
-        }
-        if (gamepad2.right_stick_y > 0.7){
-            movingClaw.setPower(1);
-        }
-        if (gamepad2.right_stick_y < -0.4) {
-            movingClaw.setPower(0.0);
-        }
-        if (gamepad2.right_stick_y == -0.5) {
-            movingClaw.setPower(-0.3);
-        }
-        if (gamepad2.right_stick_y == -0.6) {
-            movingClaw.setPower(-0.6);
-        }
-        if (gamepad2.right_stick_y == -0.7){
-            movingClaw.setPower(-0.7);
-        }
-        if (gamepad2.right_stick_y > -0.7){
-            movingClaw.setPower(-1);
-        }
     }
 }
