@@ -20,7 +20,7 @@ public class Teleop extends OpMode {
     DcMotor slideMotor = null;
     DcMotor wheelIntake1 = null;
     DcMotor wheelIntake2 = null;
-    DcMotor movingClaw = null;
+    //DcMotor movingClaw = null;
 
     //servo
     public Servo claw = null;
@@ -38,7 +38,7 @@ public class Teleop extends OpMode {
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
 
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
-        movingClaw = hardwareMap.get(DcMotor.class, "movingClaw");
+        //movingClaw = hardwareMap.get(DcMotor.class, "movingClaw");
         wheelIntake2 = hardwareMap.get(DcMotor.class, "wheelintake2");
         slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
 
@@ -47,9 +47,9 @@ public class Teleop extends OpMode {
         rightBack.setPower(0);
         leftBack.setPower(0);
         spinMotor.setPower(0);
-        wheelIntake1.setPower(0);
-        wheelIntake2.setPower(0);
-        slideMotor.setPower(0);
+        //wheelIntake1.setPower(0);
+        //wheelIntake2.setPower(0);
+        //slideMotor.setPower(0);
 
         rightFront.setDirection(DcMotor.Direction.REVERSE);
         rightBack.setDirection(DcMotor.Direction.REVERSE);
@@ -102,7 +102,7 @@ public class Teleop extends OpMode {
                 claw.setPosition(1.0);
             }
 
-            //Linear Slide
+             //Linear Slide
             if (gamepad2.left_stick_y < 0.3) {
                 slideMotor.setPower(0.0);
             }
@@ -132,7 +132,7 @@ public class Teleop extends OpMode {
             }
 
 
-
+            /*
             // WHEEL ATTACHMENT
             if (gamepad2.dpad_up == true) {
                 wheelIntake1.setPower(-.7);
@@ -153,7 +153,7 @@ public class Teleop extends OpMode {
                 wheelIntake2.setPower(1);
             }
 
-
+        /*
             //movingClaw
         if (gamepad2.right_stick_y < 0.4) {
             movingClaw.setPower(0.0);
@@ -185,5 +185,6 @@ public class Teleop extends OpMode {
         if (gamepad2.right_stick_y > -0.7){
             movingClaw.setPower(-1);
         }
+         */
     }
 }
