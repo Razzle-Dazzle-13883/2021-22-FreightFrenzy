@@ -51,8 +51,7 @@ public class Teleop extends OpMode {
         //wheelIntake2.setPower(0);
         //slideMotor.setPower(0);
 
-        rightFront.setDirection(DcMotor.Direction.REVERSE);
-        rightBack.setDirection(DcMotor.Direction.REVERSE);
+       rightBack.setDirection(DcMotor.Direction.REVERSE);
 
         claw = hardwareMap.get(Servo.class, "claw");
         claw.setPosition(0.0);
@@ -101,7 +100,7 @@ public class Teleop extends OpMode {
             } else if (gamepad2.b == true) {
                 claw.setPosition(1.0);
             }
-
+            /*
              //Linear Slide
             if (gamepad2.left_stick_y < 0.3) {
                 slideMotor.setPower(0.0);
@@ -153,38 +152,38 @@ public class Teleop extends OpMode {
                 wheelIntake2.setPower(1);
             }
 
-        /*
+        */
             //movingClaw
         if (gamepad2.right_stick_y < 0.4) {
-            movingClaw.setPower(0.0);
+            slideMotor.setPower(0.0);
         }
         if (gamepad2.right_stick_y == 0.5) {
-            movingClaw.setPower(0.3);
+            slideMotor.setPower(0.3);
         }
         if (gamepad2.right_stick_y == 0.6) {
-            movingClaw.setPower(0.6);
+            slideMotor.setPower(0.6);
         }
         if (gamepad2.right_stick_y == 0.7){
-            movingClaw.setPower(0.7);
+            slideMotor.setPower(0.7);
         }
         if (gamepad2.right_stick_y > 0.7){
-            movingClaw.setPower(1);
+            slideMotor.setPower(0.7);
         }
         if (gamepad2.right_stick_y < -0.4) {
-            movingClaw.setPower(0.0);
+            slideMotor.setPower(0.0);
         }
         if (gamepad2.right_stick_y == -0.5) {
-            movingClaw.setPower(-0.3);
+            slideMotor.setPower(-0.3);
         }
         if (gamepad2.right_stick_y == -0.6) {
-            movingClaw.setPower(-0.6);
+            slideMotor.setPower(-0.6);
         }
         if (gamepad2.right_stick_y == -0.7){
-            movingClaw.setPower(-0.7);
+            slideMotor.setPower(-0.7);
         }
         if (gamepad2.right_stick_y > -0.7){
-            movingClaw.setPower(-1);
+            slideMotor.setPower(-0.7);
         }
-         */
+
     }
 }
