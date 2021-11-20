@@ -20,14 +20,14 @@ public class CustomDectectionWebcam extends LinearOpMode {
     DcMotor leftBack;
 
 
-    private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/CustomDectection.tflite";
+    private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/model_unquant.tflite";
     private static final String LABEL_FIRST_ELEMENT = "LEVEL1";
     private static final String LABEL_SECOND_ELEMENT = "LEVEL2";
     private static final String LABEL_THIRD_ELEMENT = "LEVEL3";
 
 
     private static final String VUFORIA_KEY =
-            "AQ5Ga0r/////AAABmY3dPUqJZE+9lWYfmEZA8GxAAge/a1bHQ8udF/kH7f+UjIKGtq1629AE2grZt0+aJjE2DUw3Vd7X6lP23pVERIZtyIHHEqjz5/6o2Fvnjh0Hi3Bc34cG8W8JBoxzq8PDJ6ucRNP83vFx4dyaBuu/S3Il+YyDbTPnMC0eGdjWMyolP9d82QW2b/rsrJln8qnQIoI0qBV2YbUrV/5xyNZ9f+eyOhk3X/hgNsRKFoexNZERZbYxEU3d37adTXMMY6m2msmOP+H9/PLpgMMe1hRfrQbL+iNmLPVZqPZaRevhDFa57biNixyRuH8wERJlHI49BvrNeGshYa7yaQnNU7eGjSiyZt6DvopUXWXiyIqlcuM6";
+            "Adahhfr/////AAABmRGLi4HJekbOoQzn7r/yjGgIS3VZVB/CZv99kmxg6FzRwsRVPCTlx7vC2DVesU8VloA/tPCHGWGPPmEGYyTi95LyPIGNI1Rr2f/dJu5VVibtpiPexoU1OuAk/dOQZwMpCKuBBmJBaSEMvLvwYe8Bvu1k5oms7r+2a1kXBLuZhXMRRhIUcQ2dI+BYpWX1SN4XkBnpjCyxbI1mM3jFHk1nZdXvto4FkuCTK3cTs4saljczQlOqBPNhqwKPx2PiBc0HnJB6EN93RBUyiqzjNIO/24a+NIFeyq3Vt+Y6jvABriqWWSBJOWyqAqibSoQjDrUcaA30vn0F4FMU2EOtqNOKM0SMTwXKKpleop/qzMkoJOF2";
 
     private VuforiaLocalizer vuforia;
 
@@ -66,7 +66,7 @@ public class CustomDectectionWebcam extends LinearOpMode {
             // (typically 1.78 or 16/9).
 
             // Uncomment the following line if you want to adjust the magnification and/or the aspect ratio of the input images.
-            tfod.setZoom(1.5, 1.78);
+            //tfod.setZoom(1.5, 1.78);
         }
 
         /** Wait for the game to begin */
@@ -163,7 +163,7 @@ public class CustomDectectionWebcam extends LinearOpMode {
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfodParameters.minResultConfidence = 0.8f;
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_FIRST_ELEMENT, LABEL_SECOND_ELEMENT, LABEL_THIRD_ELEMENT);
+        tfod.loadModelFromFile(TFOD_MODEL_ASSET, LABEL_FIRST_ELEMENT, LABEL_SECOND_ELEMENT, LABEL_THIRD_ELEMENT);
     }
 
     //Bottom
@@ -188,7 +188,8 @@ public class CustomDectectionWebcam extends LinearOpMode {
     public void Level3() {
         telemetry.addData("Status", "Level 3 Selected");
         telemetry.update();
-        sleep(1500);
+        rightFront.setPower(0.5);
+        sleep(2000);
 
 
 

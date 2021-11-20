@@ -18,8 +18,8 @@ public class Teleop extends OpMode {
 
     DcMotor spinMotor = null;
     DcMotor slideMotor = null;
-    DcMotor wheelIntake1 = null;
-    DcMotor wheelIntake2 = null;
+    //DcMotor wheelIntake1 = null;
+    //DcMotor wheelIntake2 = null;
     DcMotor movingClaw = null;
 
     //servo
@@ -39,7 +39,7 @@ public class Teleop extends OpMode {
 
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
         movingClaw = hardwareMap.get(DcMotor.class, "movingClaw");
-        wheelIntake2 = hardwareMap.get(DcMotor.class, "wheelintake2");
+        ////wheelIntake2 = hardwareMap.get(DcMotor.class, "wheelintake2");
         slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
 
         leftFront.setPower(0);
@@ -47,8 +47,8 @@ public class Teleop extends OpMode {
         rightBack.setPower(0);
         leftBack.setPower(0);
         spinMotor.setPower(0);
-        wheelIntake1.setPower(0);
-        wheelIntake2.setPower(0);
+        //wheelIntake1.setPower(0);
+        //wheelIntake2.setPower(0);
         slideMotor.setPower(0);
 
         rightFront.setDirection(DcMotor.Direction.REVERSE);
@@ -97,9 +97,9 @@ public class Teleop extends OpMode {
 
             //claw
             if (gamepad2.x == true) {
-                claw.setPosition(0.0);
-            } else if (gamepad2.b == true) {
                 claw.setPosition(1.0);
+            } else if (gamepad2.b == true) {
+                claw.setPosition(0.0);
             }
 
             //Linear Slide
@@ -132,7 +132,7 @@ public class Teleop extends OpMode {
             }
 
 
-
+            /*
             // WHEEL ATTACHMENT
             if (gamepad2.dpad_up == true) {
                 wheelIntake1.setPower(-.7);
@@ -153,37 +153,17 @@ public class Teleop extends OpMode {
                 wheelIntake2.setPower(1);
             }
 
-
+            */
             //movingClaw
-        if (gamepad2.right_stick_y < 0.4) {
+        if (gamepad2.dpad_up== false) {
             movingClaw.setPower(0.0);
         }
-        if (gamepad2.right_stick_y == 0.5) {
+        if (gamepad2.dpad_up == true) {
             movingClaw.setPower(0.3);
         }
-        if (gamepad2.right_stick_y == 0.6) {
-            movingClaw.setPower(0.6);
-        }
-        if (gamepad2.right_stick_y == 0.7){
-            movingClaw.setPower(0.7);
-        }
-        if (gamepad2.right_stick_y > 0.7){
-            movingClaw.setPower(1);
-        }
-        if (gamepad2.right_stick_y < -0.4) {
-            movingClaw.setPower(0.0);
-        }
-        if (gamepad2.right_stick_y == -0.5) {
+        if (gamepad2.dpad_down == true) {
             movingClaw.setPower(-0.3);
         }
-        if (gamepad2.right_stick_y == -0.6) {
-            movingClaw.setPower(-0.6);
-        }
-        if (gamepad2.right_stick_y == -0.7){
-            movingClaw.setPower(-0.7);
-        }
-        if (gamepad2.right_stick_y > -0.7){
-            movingClaw.setPower(-1);
-        }
+
     }
 }
