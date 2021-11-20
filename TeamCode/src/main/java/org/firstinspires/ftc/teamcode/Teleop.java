@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
@@ -19,8 +20,6 @@ public class Teleop extends OpMode {
     DcMotor spinMotor = null;
     DcMotor slideMotor = null;
 
-    //DcMotor wheelIntake1 = null;
-    //DcMotor wheelIntake2 = null;
     DcMotor movingClaw = null;
 
     //servo
@@ -40,7 +39,7 @@ public class Teleop extends OpMode {
 
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
         movingClaw = hardwareMap.get(DcMotor.class, "movingClaw");
-        ////wheelIntake2 = hardwareMap.get(DcMotor.class, "wheelintake2");
+
         slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
 
         leftFront.setPower(0);
@@ -48,11 +47,12 @@ public class Teleop extends OpMode {
         rightBack.setPower(0);
         leftBack.setPower(0);
         spinMotor.setPower(0);
-        //wheelIntake1.setPower(0);
-        //wheelIntake2.setPower(0);
+
+
         slideMotor.setPower(0);
 
        rightBack.setDirection(DcMotor.Direction.REVERSE);
+       leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
         claw = hardwareMap.get(Servo.class, "claw");
         claw.setPosition(0.0);
@@ -130,30 +130,8 @@ public class Teleop extends OpMode {
             if (gamepad2.left_stick_y == 1.0){
                 slideMotor.setPower(1);
             }
+                */
 
-
-            /*
-            // WHEEL ATTACHMENT
-            if (gamepad2.dpad_up == true) {
-                wheelIntake1.setPower(-.7);
-            }
-            if (gamepad2.dpad_up == true) {
-                wheelIntake2.setPower(.7);
-            }
-            if (gamepad2.dpad_down == true) {
-                wheelIntake1.setPower(0.0);
-            }
-            if (gamepad2.dpad_down == true) {
-                wheelIntake2.setPower(0.0);
-            }
-            if (gamepad2.dpad_left== true) {
-                wheelIntake1.setPower(-1);
-            }
-            if (gamepad2.dpad_left == true) {
-                wheelIntake2.setPower(1);
-            }
-
-            */
             //movingClaw
         if (gamepad2.dpad_up== false) {
             movingClaw.setPower(0.0);
