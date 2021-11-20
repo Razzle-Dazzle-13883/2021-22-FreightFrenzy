@@ -18,6 +18,7 @@ public class Teleop extends OpMode {
 
     DcMotor spinMotor = null;
     DcMotor slideMotor = null;
+
     //DcMotor wheelIntake1 = null;
     //DcMotor wheelIntake2 = null;
     DcMotor movingClaw = null;
@@ -51,8 +52,7 @@ public class Teleop extends OpMode {
         //wheelIntake2.setPower(0);
         slideMotor.setPower(0);
 
-        rightFront.setDirection(DcMotor.Direction.REVERSE);
-        rightBack.setDirection(DcMotor.Direction.REVERSE);
+       rightBack.setDirection(DcMotor.Direction.REVERSE);
 
         claw = hardwareMap.get(Servo.class, "claw");
         claw.setPosition(0.0);
@@ -101,8 +101,8 @@ public class Teleop extends OpMode {
             } else if (gamepad2.b == true) {
                 claw.setPosition(0.0);
             }
-
-            //Linear Slide
+            /*
+             //Linear Slide
             if (gamepad2.left_stick_y < 0.3) {
                 slideMotor.setPower(0.0);
             }
@@ -163,6 +163,7 @@ public class Teleop extends OpMode {
         }
         if (gamepad2.dpad_down == true) {
             movingClaw.setPower(-0.3);
+
         }
 
     }
