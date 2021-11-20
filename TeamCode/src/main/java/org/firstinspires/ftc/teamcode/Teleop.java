@@ -47,9 +47,7 @@ public class Teleop extends OpMode {
         rightBack.setPower(0);
         leftBack.setPower(0);
         spinMotor.setPower(0);
-        //wheelIntake1.setPower(0);
-        //wheelIntake2.setPower(0);
-        //slideMotor.setPower(0);
+        slideMotor.setPower(0);
 
        rightBack.setDirection(DcMotor.Direction.REVERSE);
 
@@ -129,60 +127,13 @@ public class Teleop extends OpMode {
             if (gamepad2.left_stick_y == 1.0){
                 slideMotor.setPower(1);
             }
-
-
-            /*
-            // WHEEL ATTACHMENT
-            if (gamepad2.dpad_up == true) {
-                wheelIntake1.setPower(-.7);
-            }
-            if (gamepad2.dpad_up == true) {
-                wheelIntake2.setPower(.7);
-            }
-            if (gamepad2.dpad_down == true) {
-                wheelIntake1.setPower(0.0);
-            }
-            if (gamepad2.dpad_down == true) {
-                wheelIntake2.setPower(0.0);
-            }
-            if (gamepad2.dpad_left== true) {
-                wheelIntake1.setPower(-1);
-            }
-            if (gamepad2.dpad_left == true) {
-                wheelIntake2.setPower(1);
-            }
-
         */
             //movingClaw
-        if (gamepad2.right_stick_y < 0.4) {
-            slideMotor.setPower(0.0);
-        }
-        if (gamepad2.right_stick_y == 0.5) {
-            slideMotor.setPower(0.3);
-        }
-        if (gamepad2.right_stick_y == 0.6) {
-            slideMotor.setPower(0.6);
-        }
-        if (gamepad2.right_stick_y == 0.7){
-            slideMotor.setPower(0.7);
-        }
-        if (gamepad2.right_stick_y > 0.7){
-            slideMotor.setPower(0.7);
-        }
-        if (gamepad2.right_stick_y < -0.4) {
-            slideMotor.setPower(0.0);
-        }
-        if (gamepad2.right_stick_y == -0.5) {
-            slideMotor.setPower(-0.3);
-        }
-        if (gamepad2.right_stick_y == -0.6) {
-            slideMotor.setPower(-0.6);
-        }
-        if (gamepad2.right_stick_y == -0.7){
-            slideMotor.setPower(-0.7);
-        }
-        if (gamepad2.right_stick_y > -0.7){
-            slideMotor.setPower(-0.7);
+
+        if (gamepad2.left_bumper == true) {
+            slideMotor.setPower(-.7);
+        } else if (gamepad2.right_bumper == true){
+            slideMotor.setPower(.7);
         }
 
     }
