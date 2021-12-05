@@ -23,7 +23,7 @@ public class Teleop extends OpMode {
     DcMotor movingClaw = null;
 
     //servo
-    public Servo claw = null;
+     Servo claw = null;
 
 
     public boolean turboMode = true;
@@ -50,9 +50,8 @@ public class Teleop extends OpMode {
 
 
         slideMotor.setPower(0);
-
-       rightBack.setDirection(DcMotor.Direction.REVERSE);
-       leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
         claw = hardwareMap.get(Servo.class, "claw");
         claw.setPosition(0.0);
