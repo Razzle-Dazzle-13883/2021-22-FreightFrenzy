@@ -139,7 +139,7 @@ public class CustomDectectionWebcam extends LinearOpMode {
                 telemetry.update();
             }
             telemetry.update();
-            sleep(7500);
+            sleep(15000);
         }
 
         if (tfod != null) {

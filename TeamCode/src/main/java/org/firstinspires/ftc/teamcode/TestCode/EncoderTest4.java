@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.TestCode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Autonomous(name = "WorkingEncoderMaybe")
 public class EncoderTest4 extends LinearOpMode {
@@ -36,6 +37,8 @@ public class EncoderTest4 extends LinearOpMode {
 
         wheelIntake1 = hardwareMap.get(DcMotor.class, "wheelIntake1");
         wheelintake2 = hardwareMap.get(DcMotor.class, "wheelintake2");
+        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -59,8 +62,8 @@ public class EncoderTest4 extends LinearOpMode {
         // the first number will move the leftfront wheel 1000 ticks, the 2nd will move the righfront wheel backwards 100 ticks, and so on
         //the last number, (0.25 in this case) will make them move at a speed of 0.25
 
-        drive(538, 538, 538, 538, 1.0);
-        drive(-538, -538, -538, -538, 1.0);
+        drive(538, 538, 538, 538, .5);
+        drive(-538, -538, -538, -538, .5);
     }
 
     private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {

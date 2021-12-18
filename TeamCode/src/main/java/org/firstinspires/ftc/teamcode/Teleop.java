@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-@TeleOp(name="TeleopForMainBot")
+@TeleOp(name="Teleop")
 public class Teleop extends OpMode {
 
     //motors
@@ -90,7 +90,10 @@ public class Teleop extends OpMode {
                 spinMotor.setPower(0);
             }
             if (gamepad2.right_bumper == true) {
-                spinMotor.setPower(.25);
+                spinMotor.setPower(.6);
+            }
+            if (gamepad2.x == true) {
+            spinMotor.setPower(-.2);
             }
 
 
@@ -100,36 +103,6 @@ public class Teleop extends OpMode {
             } else if (gamepad2.b == true) {
                 claw.setPosition(0.0);
             }
-            /*
-             //Linear Slide
-            if (gamepad2.left_stick_y < 0.3) {
-                slideMotor.setPower(0.0);
-            }
-            if (gamepad2.left_stick_y == 0.3) {
-                slideMotor.setPower(0.3);
-            }
-            if (gamepad2.left_stick_y == 0.4) {
-                slideMotor.setPower(0.4);
-            }
-            if (gamepad2.left_stick_y == 0.5){
-                slideMotor.setPower(0.5);
-            }
-            if (gamepad2.left_stick_y == 0.6){
-                slideMotor.setPower(0.6);
-            }
-            if (gamepad2.left_stick_y == 0.7){
-                slideMotor.setPower(0.7);
-            }
-            if (gamepad2.left_stick_y == 0.8){
-                slideMotor.setPower(0.8);
-            }
-            if (gamepad2.left_stick_y == 0.9){
-                slideMotor.setPower(0.9);
-            }
-            if (gamepad2.left_stick_y == 1.0){
-                slideMotor.setPower(1);
-            }
-                */
 
             //movingClaw
         if (gamepad2.dpad_up== false) {
