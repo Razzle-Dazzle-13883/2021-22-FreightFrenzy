@@ -45,7 +45,7 @@ import java.util.List;
 @Autonomous(name = "Concept: TensorFlow Object Detection Webcam", group = "Concept")
 
 public class OpenCV_Test_Blue_Only extends LinearOpMode {
-    private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/myCustomFreightFrenzyModel.tflite";
+    private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/blue.tflite";
     private static final String[] LABELS = {
       "LEVEL1",
       "LEVEL2",
@@ -118,7 +118,7 @@ public class OpenCV_Test_Blue_Only extends LinearOpMode {
 
         // Loading trackables is not necessary for the TensorFlow Object Detection engine.
     }
-    
+
     private void initTfod() {
         int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
             "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -127,6 +127,6 @@ public class OpenCV_Test_Blue_Only extends LinearOpMode {
        tfodParameters.isModelTensorFlow2 = true;
        tfodParameters.inputSize = 320;
        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-       tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
+       tfod.loadModelFromFile(TFOD_MODEL_ASSET, LABELS);
     }
 }

@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 
-@Autonomous(name = "BasicAutow")
+@Autonomous(name = "MotorLocationTest")
     public class MototrLocation extends LinearOpMode {
     private DcMotor rightFront;
     private DcMotor rightBack;

@@ -16,8 +16,7 @@ public class EncoderTest4 extends LinearOpMode {
      DcMotor rightBack;
      DcMotor spinMotor;
 
-     DcMotor wheelIntake1;
-     DcMotor wheelintake2;
+
 
     //ENcoder Positions
 
@@ -35,8 +34,7 @@ public class EncoderTest4 extends LinearOpMode {
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
 
-        wheelIntake1 = hardwareMap.get(DcMotor.class, "wheelIntake1");
-        wheelintake2 = hardwareMap.get(DcMotor.class, "wheelintake2");
+
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -62,8 +60,8 @@ public class EncoderTest4 extends LinearOpMode {
         // the first number will move the leftfront wheel 1000 ticks, the 2nd will move the righfront wheel backwards 100 ticks, and so on
         //the last number, (0.25 in this case) will make them move at a speed of 0.25
 
-        drive(538, 538, 538, 538, .5);
-        drive(-538, -538, -538, -538, .5);
+        drive(-537, -537, -537, -537, .5);
+        //drive(-537, -537, -537, -537, -.5);
     }
 
     private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {
