@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.TestCode;
+package org.firstinspires.ftc.teamcode.Autonomous.RedAuto;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "WorkingEncoderMaybe")
-public class EncoderTest4 extends LinearOpMode {
+@Autonomous(name = "RedBasePosition2")
+public class RedBasePosition2 extends LinearOpMode {
 
 
      DcMotor leftFront;
@@ -61,52 +61,30 @@ public class EncoderTest4 extends LinearOpMode {
         //the last number, (0.25 in this case) will make them move at a speed of 0.25
 
 
-
         //1 inch is 38
 
-        //moving to the side
-        drive(-38*24, 38*24, 38*24, -38*24, .25);
-       // moves up
-        drive(-38*10, -38*10, -38*10, -38*10, .25);
-        //right
-        drive(-38*10, 38*10, 38*10, -38*10, .25);
+        //going up
+        drive(-38*8, -38*8, -38*8, -38*8, .25);
+        //turn
+        drive(-38*29, 38*29, -38*29, 38*29, .15);
         //down
-        drive(38*2, 38*2, 38*2, 38*2, .25);
+        drive(38*32, 38*32, 38*32, 38*32, .25);
+        //move closer to carasouel
+        drive(-38*4, 38*4, 38*4, -38*4, .15);
 
-        drive(-38*1, -38*1, 38*1, 38*1, .25);
 
-        spinMotor.setPower(.35);
+        spinMotor.setPower(-.30);
         sleep(5000);
         spinMotor.setPower(0);
         sleep(2000);
-        drive(-38*22, -38*22, -38*22, -38*22, .25);
+        //goes back
+        //drive(38*5, -38*5, -38*5, 38*5, .25);
+
+       // drive(38*5, 38*5, 38*5, 38*5, .25);
 
 
+        drive(38*26, -38*26, -38*26, 38*26, .25);
 
-        //drive(-38*43, -38*43, -38*43, -38*43, .5);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //drive(-537, -537, -537, -537, -.5);
     }
 
     private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {

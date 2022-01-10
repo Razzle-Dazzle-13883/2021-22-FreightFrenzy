@@ -66,10 +66,10 @@ public class MechanumTeleop extends OpMode {
         double y = -gamepad1.left_stick_x;
         double r = -gamepad1.right_stick_x;
         if (turboMode) {
-            leftFront.setPower(x + y - r);
-            leftBack.setPower(x - y - r);
-            rightFront.setPower(x - y + r);
-            rightBack.setPower(x + y + r);
+            leftFront.setPower((x + y + r) / 1.5);
+            leftBack.setPower((x - y - r)  / 1.5);
+            rightFront.setPower((x - y + r) / 1.5);
+            rightBack.setPower((x + y + r) / 1.5);
         } else {
             leftFront.setPower((x + y + r) / 3.7);
             leftBack.setPower((x - y + r) / 3.7);
@@ -90,10 +90,10 @@ public class MechanumTeleop extends OpMode {
                 spinMotor.setPower(0);
             }
             if (gamepad2.right_bumper == true) {
-                spinMotor.setPower(.6);
+                spinMotor.setPower(.35);
             }
-            if (gamepad2.x == true) {
-            spinMotor.setPower(-.2);
+            if (gamepad2.dpad_left == true) {
+                spinMotor.setPower(-.35);
             }
 
 
@@ -105,14 +105,14 @@ public class MechanumTeleop extends OpMode {
             }
 
             //movingClaw
-        if (gamepad2.dpad_up== false) {
+        //if (gamepad2.dpad_up == false) {
             movingClaw.setPower(0.0);
-        }
+        //}
         if (gamepad2.dpad_up == true) {
-            movingClaw.setPower(0.3);
+            movingClaw.setPower(0.6);
         }
         if (gamepad2.dpad_down == true) {
-            movingClaw.setPower(-0.3);
+            movingClaw.setPower(-0.6);
 
         }
 

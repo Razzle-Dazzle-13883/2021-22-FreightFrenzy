@@ -43,6 +43,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import java.util.List;
 
 @Autonomous(name = "Concept: TensorFlow Object Detection Webcam", group = "Concept")
+@Disabled
 
 public class OpenCV_Test_Blue_Only extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/blue.tflite";

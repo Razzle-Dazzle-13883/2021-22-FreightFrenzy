@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.TestCode;
+package org.firstinspires.ftc.teamcode.Autonomous.BlueAuto;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "WorkingEncoderMaybe")
-public class EncoderTest4 extends LinearOpMode {
+@Autonomous(name = "BlueBasePosition2")
+public class BlueBasePosition2 extends LinearOpMode {
 
 
      DcMotor leftFront;
@@ -75,11 +75,12 @@ public class EncoderTest4 extends LinearOpMode {
 
         drive(-38*1, -38*1, 38*1, 38*1, .25);
 
-        spinMotor.setPower(.35);
+        spinMotor.setPower(.30);
         sleep(5000);
         spinMotor.setPower(0);
         sleep(2000);
-        drive(-38*22, -38*22, -38*22, -38*22, .25);
+
+        drive(-38*22, -38*23, -38*22, -38*23, .25);
 
 
 
