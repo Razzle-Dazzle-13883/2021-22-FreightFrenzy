@@ -78,7 +78,7 @@ public class MechanumTeleop extends OpMode {
         }
 
             //Fastmode and slowmode
-            if (gamepad1.y == true) {
+        if (gamepad1.y == true) {
                 turboMode = true;
             } else if (gamepad1.a == true) {
                 turboMode = false;
@@ -86,6 +86,13 @@ public class MechanumTeleop extends OpMode {
 
 
             //Carasol mover
+        spinMotor.setPower(gamepad2.left_trigger - gamepad2.right_trigger);
+
+
+
+
+
+                /*standard
             if (gamepad2.left_bumper == true) {
                 spinMotor.setPower(0);
             }
@@ -95,24 +102,71 @@ public class MechanumTeleop extends OpMode {
             if (gamepad2.dpad_left == true) {
                 spinMotor.setPower(-.35);
             }
+            */
+
+        //pressurebased
 
 
-            //claw
-            if (gamepad2.x == true) {
+        /*
+        if (gamepad2.left_bumper == true) {
+            spinMotor.setPower(0);
+        }
+        else if (gamepad2.right_bumper == true) {
+            spinMotor.setPower(0);
+        }
+        if (gamepad2.left_trigger == 0.0) {
+            spinMotor.setPower(0.0);
+        }
+        if (gamepad2.left_trigger <= 0.2 ) {
+            spinMotor.setPower(0.2);
+        }
+        if (gamepad2.left_trigger <= 0.5 )  {
+            spinMotor.setPower(0.5);
+        }
+        if (gamepad2.left_trigger <= 0.7 ) {
+            spinMotor.setPower(0.7);
+        }
+        if (gamepad2.left_trigger <= 1 ) {
+            spinMotor.setPower(1);
+        }
+
+        if (gamepad2.right_trigger == 0.0) {
+            spinMotor.setPower(0.0);
+        }
+        if (gamepad2.right_trigger <= 0.2 ) {
+            spinMotor.setPower(-0.2);
+        }
+        if (gamepad2.right_trigger <= 0.5 )  {
+            spinMotor.setPower(-0.5);
+        }
+        if (gamepad2.right_trigger <= 0.7 ) {
+            spinMotor.setPower(-0.7);
+        }
+        if (gamepad2.right_trigger <= 1 ) {
+            spinMotor.setPower(-1);
+        }
+
+
+         */
+
+
+
+        //claw
+
+
+        if (gamepad2.x == true) {
                 claw.setPosition(1.0);
-            } else if (gamepad2.b == true) {
+        } else if (gamepad2.b == true) {
                 claw.setPosition(0.0);
-            }
+        }
 
             //movingClaw
-        //if (gamepad2.dpad_up == false) {
-            movingClaw.setPower(0.0);
-        //}
+
         if (gamepad2.dpad_up == true) {
-            movingClaw.setPower(0.6);
+            movingClaw.setPower(0.7);
         }
         if (gamepad2.dpad_down == true) {
-            movingClaw.setPower(-0.6);
+            movingClaw.setPower(-0.7);
 
         }
 

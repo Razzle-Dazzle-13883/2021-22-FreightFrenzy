@@ -73,7 +73,7 @@ public class RedBasePosition2 extends LinearOpMode {
         drive(-38*4, 38*4, 38*4, -38*4, .15);
 
 
-        spinMotor.setPower(-.30);
+        spinMotor.setPower(-.70);
         sleep(5000);
         spinMotor.setPower(0);
         sleep(2000);

@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "BlueBasePosition2")
-public class BlueBasePosition2 extends LinearOpMode {
+@Autonomous(name = "BlueDuck")
+public class BlueDuck extends LinearOpMode {
 
 
      DcMotor leftFront;
