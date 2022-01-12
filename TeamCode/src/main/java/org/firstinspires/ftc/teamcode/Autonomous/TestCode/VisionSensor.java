@@ -1,4 +1,33 @@
-package org.firstinspires.ftc.teamcode;
+/* Copyright (c) 2019 FIRST. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted (subject to the limitations in the disclaimer below) provided that
+ * the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this list
+ * of conditions and the following disclaimer.
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this
+ * list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution.
+ *
+ * Neither the name of FIRST nor the names of its contributors may be used to endorse or
+ * promote products derived from this software without specific prior written permission.
+ *
+ * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
+ * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.firstinspires.ftc.teamcode.Autonomous.TestCode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -13,63 +42,52 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
-@Autonomous(name = "CustomDectectionWebcam")
+@Autonomous(name = " ACTUAL TensorFlow Object Detection Webcam", group = "Concept")
 @Disabled
 
-public class CustomDectectionWebcam extends LinearOpMode {
+public class VisionSensor extends LinearOpMode {
+
     DcMotor rightFront;
     DcMotor rightBack;
     DcMotor leftFront;
     DcMotor leftBack;
 
+    DcMotor spinMotor;
 
-    private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/model_unquant.tflite";
-    private static final String LABEL_FIRST_ELEMENT = "LEVEL1";
-    private static final String LABEL_SECOND_ELEMENT = "LEVEL2";
-    private static final String LABEL_THIRD_ELEMENT = "LEVEL3";
 
+    private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/blue.tflite";
+    private static final String[] LABELS = {
+      "LEVEL1",
+      "LEVEL2",
+      "LEVEL3"
+    };
 
     private static final String VUFORIA_KEY =
             "Adahhfr/////AAABmRGLi4HJekbOoQzn7r/yjGgIS3VZVB/CZv99kmxg6FzRwsRVPCTlx7vC2DVesU8VloA/tPCHGWGPPmEGYyTi95LyPIGNI1Rr2f/dJu5VVibtpiPexoU1OuAk/dOQZwMpCKuBBmJBaSEMvLvwYe8Bvu1k5oms7r+2a1kXBLuZhXMRRhIUcQ2dI+BYpWX1SN4XkBnpjCyxbI1mM3jFHk1nZdXvto4FkuCTK3cTs4saljczQlOqBPNhqwKPx2PiBc0HnJB6EN93RBUyiqzjNIO/24a+NIFeyq3Vt+Y6jvABriqWWSBJOWyqAqibSoQjDrUcaA30vn0F4FMU2EOtqNOKM0SMTwXKKpleop/qzMkoJOF2";
 
     private VuforiaLocalizer vuforia;
 
+
     private TFObjectDetector tfod;
 
     @Override
     public void runOpMode() {
+
         rightFront = hardwareMap.dcMotor.get("rightFront");
         rightBack = hardwareMap.dcMotor.get("rightBack");
         leftFront = hardwareMap.dcMotor.get("leftFront");
         leftBack = hardwareMap.dcMotor.get("leftBack");
-
-
-        //rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        telemetry.addData("Status", "Motors and Servo Initialized");
-        telemetry.update();
+        spinMotor = hardwareMap.dcMotor.get("leftBack");
 
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.
         initVuforia();
         initTfod();
 
-        /**
-         * Activate TensorFlow Object Detection before we wait for the start command.
-         * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
-         **/
         if (tfod != null) {
             tfod.activate();
 
-            // The TensorFlow software will scale the input images from the camera to a lower resolution.
-            // This can result in lower detection accuracy at longer distances (> 55cm or 22").
-            // If your target is at distance greater than 50 cm (20") you can adjust the magnification value
-            // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
-            // should be set to the value of the images used to create the TensorFlow Object Detection model
-            // (typically 1.78 or 16/9).
-
-            // Uncomment the following line if you want to adjust the magnification and/or the aspect ratio of the input images.
-            //tfod.setZoom(1.5, 1.78);
+            tfod.setZoom(1, 16.0/9.0);
         }
 
         /** Wait for the game to begin */
@@ -82,7 +100,6 @@ public class CustomDectectionWebcam extends LinearOpMode {
             int a = 0;
             int b = 0;
             int c = 0;
-            int d = 0;
             while (counter <= 35) {
                 if (tfod != null) {
                     // getUpdatedRecognitions() will return null if no new information is available since
@@ -91,8 +108,9 @@ public class CustomDectectionWebcam extends LinearOpMode {
                     if (updatedRecognitions != null) {
                         telemetry.addData("# Object Detected", updatedRecognitions.size());
                         if (updatedRecognitions.size() == 0 ) {
+                            // empty list.  no objects recognized.
                             telemetry.addData("TFOD", "No items detected.");
-                            d += 1;
+                            c += 1;
                         } else {
                             // list is not empty.
                             // step through the list of recognitions and display boundary info.
@@ -106,17 +124,15 @@ public class CustomDectectionWebcam extends LinearOpMode {
 
                                 // check label to see which target zone to go after.
                                 if (recognition.getLabel().equals("LEVEL1")) {
-                                    telemetry.addData("Target Zone", "1");
+                                    telemetry.addData("LEVEL1", "1");
                                     a += 1;
                                 } else if (recognition.getLabel().equals("LEVEL2")) {
-                                    telemetry.addData("Target Zone", "2");
+                                    telemetry.addData("LEVEL2", "2");
                                     b += 1;
                                 } else if (recognition.getLabel().equals("LEVEL3")) {
-                                    telemetry.addData("Target Zone", "3");
+                                telemetry.addData("LEVEL3", "3");
                                     c += 1;
                                 }
-
-
                             }
                         }
 
@@ -125,24 +141,18 @@ public class CustomDectectionWebcam extends LinearOpMode {
                     }
                 }
             }
-            if (a > b && a > c && a > d) {
-                Level1();
-                telemetry.addData("Status", "Level 1 Dectecting");
-                telemetry.update();
-            } else if (b > a && b > c && b > d){
-                Level2();
-                telemetry.addData("Status", "Level 2 Dectecting");
-                telemetry.update();
-            } else if (c > a && c > b && c > d) {
-                Level3();
-                telemetry.addData("Status", "Level 3 Dectecting");
-                telemetry.update();
+            if (a > b && a > c) {
+                targetA();
+            } else if (b > a && b > c){
+                targetB();
+            } else if (c > a && c > b) {
+                targetC();
             } else{
                 telemetry.addData("Target Zone", "Unknown");
                 telemetry.update();
             }
-            telemetry.update();
-            sleep(15000);
+
+            sleep(10000);
         }
 
         if (tfod != null) {
@@ -150,51 +160,59 @@ public class CustomDectectionWebcam extends LinearOpMode {
         }
     }
 
+    /**
+     * Initialize the Vuforia localization engine.
+     */
     private void initVuforia() {
-
+        /*
+         * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
+         */
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
         parameters.cameraName = hardwareMap.get(WebcamName.class, "Webcam 1");
 
+        //  Instantiate the Vuforia engine
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
+
+        // Loading trackables is not necessary for the TensorFlow Object Detection engine.
     }
 
+    /**
+     * Initialize the TensorFlow Object Detection engine.
+     */
     private void initTfod() {
         int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
                 "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfodParameters.minResultConfidence = 0.8f;
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-        tfod.loadModelFromFile(TFOD_MODEL_ASSET, LABEL_FIRST_ELEMENT, LABEL_SECOND_ELEMENT, LABEL_THIRD_ELEMENT);
+        tfod.loadModelFromFile(TFOD_MODEL_ASSET, LABELS);
+    }
+    //LEVEL 1 (Bottom)
+    public void targetA() {
+        telemetry.addData("Status", "LEVEL1");
+        telemetry.update();
+        spinMotor.setPower(.5);
+        sleep(500);
     }
 
-    //Bottom
-    public void Level1() {
-        telemetry.addData("Status", "Level 1 Selected");
+    //LEVEL 2 (MID)
+    public void targetB() {
+        telemetry.addData("Status", "LEVEL2");
         telemetry.update();
+        spinMotor.setPower(-.5);
+        sleep(500);
+
+    }
+
+    //LEVEL 3 (TOP)
+    public void targetC() {
+        telemetry.addData("Status", "LEVEL3");
+        telemetry.update();
+        spinMotor.setPower(-.3);
         sleep(1500);
 
-
     }
 
-    //Middle
-    public void Level2() {
-        telemetry.addData("Status", "Level 2 Selected");
-        telemetry.update();
-        sleep(1500);
-
-
-    }
-
-    //Top
-    public void Level3() {
-        telemetry.addData("Status", "Level 3 Selected");
-        telemetry.update();
-        rightFront.setPower(0.5);
-        sleep(2000);
-
-
-
-    }
 }

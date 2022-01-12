@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Autonomous.RedAuto;
+package org.firstinspires.ftc.teamcode.Autonomous.BigChassis.Red;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "RedDuck")
-public class RedDuck extends LinearOpMode {
+@Autonomous(name = "RedWarehouse")
+public class RedWarehouse extends LinearOpMode {
 
 
      DcMotor leftFront;
@@ -63,28 +63,10 @@ public class RedDuck extends LinearOpMode {
 
         //1 inch is 38
 
-        //going up
-        drive(-38*8, -38*8, -38*8, -38*8, .25);
-        //turn
-        drive(-38*29, 38*29, -38*29, 38*29, .15);
-        //down
-        drive(38*32, 38*32, 38*32, 38*32, .25);
-        //move closer to carasouel
-        drive(-38*4, 38*4, 38*4, -38*4, .15);
-
-
-        spinMotor.setPower(-.70);
-        sleep(5000);
-        spinMotor.setPower(0);
-        sleep(2000);
-        //goes back
-        //drive(38*5, -38*5, -38*5, 38*5, .25);
-
-       // drive(38*5, 38*5, 38*5, 38*5, .25);
-
-
-        drive(38*26, -38*26, -38*26, 38*26, .25);
-
+        //turning
+        drive(-38*14, -38*14, -38*14, -38*14, .25);
+        drive(-38*26, 38*26, -38*26, 38*26, .15);
+        drive(-38*60, -38*60, -38*60, -38*60, 1);
     }
 
     private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {

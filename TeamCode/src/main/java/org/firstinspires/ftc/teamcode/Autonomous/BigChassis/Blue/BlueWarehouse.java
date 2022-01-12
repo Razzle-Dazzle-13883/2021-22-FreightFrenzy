@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Autonomous.RedAuto;
+package org.firstinspires.ftc.teamcode.Autonomous.BigChassis.Blue;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "RedBasePosition1")
-public class RedBasePosition1 extends LinearOpMode {
+@Autonomous(name = "BlueWarehouse")
+public class BlueWarehouse extends LinearOpMode {
 
 
      DcMotor leftFront;
@@ -64,9 +64,9 @@ public class RedBasePosition1 extends LinearOpMode {
         //1 inch is 38
 
         //turning
-        drive(-38*14, -38*14, -38*14, -38*14, .25);
-        drive(-38*26, 38*26, -38*26, 38*26, .15);
-        drive(-38*60, -38*60, -38*60, -38*60, 1);
+        drive(38*14, 38*14, 38*14, 38*14, .25);
+        drive(38*26, -38*26, 38*26, -38*26, .15);
+        drive(38*60, 38*60, 38*60, 38*60, 1);
     }
 
     private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {

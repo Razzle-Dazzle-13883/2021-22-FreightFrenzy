@@ -124,13 +124,13 @@ public class OpenCV_Test_Blue_Only_2 extends LinearOpMode {
 
                                 // check label to see which target zone to go after.
                                 if (recognition.getLabel().equals("LEVEL1")) {
-                                    telemetry.addData("Target Zone", "A");
+                                    telemetry.addData("LEVEL1", "1");
                                     a += 1;
                                 } else if (recognition.getLabel().equals("LEVEL2")) {
-                                    telemetry.addData("Target Zone", "B");
+                                    telemetry.addData("LEVEL2", "2");
                                     b += 1;
                                 } else if (recognition.getLabel().equals("LEVEL3")) {
-                                telemetry.addData("Target Zone", "C");
+                                telemetry.addData("LEVEL3", "3");
                                     c += 1;
                                 }
                             }

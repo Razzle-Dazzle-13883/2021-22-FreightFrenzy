@@ -1,32 +1,26 @@
-package org.firstinspires.ftc.teamcode.TestCode;
+package org.firstinspires.ftc.teamcode.Autonomous.BigChassis.Red;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "Encoder test 1")
-@Disabled
-
-public class EncoderTest2 extends LinearOpMode {
+@Autonomous(name = "RedDuck")
+public class RedDuck extends LinearOpMode {
 
 
-    private DcMotor leftFront;
-    private DcMotor rightFront;
-    private DcMotor leftBack;
-    private DcMotor rightBack;
-    private DcMotor spinMotor;
+     DcMotor leftFront;
+     DcMotor rightFront;
+     DcMotor leftBack;
+     DcMotor rightBack;
+     DcMotor spinMotor;
 
-    private DcMotor wheelIntake1;
-    private DcMotor wheelintake2;
 
-    //Encoder Positions
-
-    private int leftFrontPos;
-    private int rightFrontPos;
-    private int leftBackPos;
-    private int rightBackPos;
+     int leftFrontPos;
+     int rightFrontPos;
+     int leftBackPos;
+     int rightBackPos;
 
 
     @Override
@@ -37,8 +31,9 @@ public class EncoderTest2 extends LinearOpMode {
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
 
-        wheelIntake1 = hardwareMap.get(DcMotor.class, "wheelIntake1");
-        wheelintake2 = hardwareMap.get(DcMotor.class, "wheelintake2");
+
+        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -62,8 +57,31 @@ public class EncoderTest2 extends LinearOpMode {
         // the first number will move the leftfront wheel 1000 ticks, the 2nd will move the righfront wheel backwards 100 ticks, and so on
         //the last number, (0.25 in this case) will make them move at a speed of 0.25
 
-        drive(1000, 1000, -1000, 1000, 1.0);
-        drive(-1000, -1000, -1000, -1000, 1.0);
+
+        //1 inch is 38
+
+        //going up
+        drive(-38*8, -38*8, -38*8, -38*8, .25);
+        //turn
+        drive(-38*29, 38*29, -38*29, 38*29, .15);
+        //down
+        drive(38*32, 38*32, 38*32, 38*32, .25);
+        //move closer to carasouel
+        drive(-38*4, 38*4, 38*4, -38*4, .15);
+
+
+        spinMotor.setPower(-.70);
+        sleep(5000);
+        spinMotor.setPower(0);
+        sleep(2000);
+        //goes back
+        //drive(38*5, -38*5, -38*5, 38*5, .25);
+
+       // drive(38*5, 38*5, 38*5, 38*5, .25);
+
+
+        drive(38*26, -38*26, -38*26, 38*26, .25);
+
     }
 
     private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {

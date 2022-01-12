@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Autonomous.BlueAuto;
+package org.firstinspires.ftc.teamcode.Autonomous.BigChassis.Blue;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "BlueBasePosition2")
-public class BlueBasePosition2 extends LinearOpMode {
+@Autonomous(name = "BlueDuck")
+public class BlueDuck extends LinearOpMode {
 
 
      DcMotor leftFront;
@@ -56,7 +56,6 @@ public class BlueBasePosition2 extends LinearOpMode {
         waitForStart();
 
 
-        //drive(1000, 1000, -1000, 1000, 0.25);
         // the first number will move the leftfront wheel 1000 ticks, the 2nd will move the righfront wheel backwards 100 ticks, and so on
         //the last number, (0.25 in this case) will make them move at a speed of 0.25
 
