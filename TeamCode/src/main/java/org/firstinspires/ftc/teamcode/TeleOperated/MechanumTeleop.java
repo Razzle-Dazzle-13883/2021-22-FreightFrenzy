@@ -25,9 +25,7 @@ public class MechanumTeleop extends OpMode {
     //servo
      Servo claw = null;
 
-
-    public boolean turboMode = true;
-
+    public boolean turboMode = false;
 
     @Override
     public void init() {
@@ -48,14 +46,12 @@ public class MechanumTeleop extends OpMode {
         leftBack.setPower(0);
         spinMotor.setPower(0);
 
-
         slideMotor.setPower(0);
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
         claw = hardwareMap.get(Servo.class, "claw");
         claw.setPosition(0.0);
-
     }
 
     @Override
