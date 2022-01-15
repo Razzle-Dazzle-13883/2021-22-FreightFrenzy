@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Autonomous(name = "BlueDuckS")
-@Disabled
+
 public class BlueDuckS extends LinearOpMode {
 
      DcMotor leftFront;

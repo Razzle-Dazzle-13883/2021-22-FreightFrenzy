@@ -2,11 +2,14 @@ package org.firstinspires.ftc.teamcode.Autonomous.BigChassis.Red;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Autonomous(name = "RedDuck")
+@Disabled
+
 public class RedDuck extends LinearOpMode {
 
 

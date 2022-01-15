@@ -1,5 +1,4 @@
-package org.firstinspires.ftc.teamcode.Autonomous.BigChassis.Red;
-
+package org.firstinspires.ftc.teamcode.Autonomous.SmallChassis.Red.Warehouse;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -7,10 +6,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "RedWarehouse")
+@Autonomous(name = "RedWarehouseS")
 @Disabled
-public class RedWarehouse extends LinearOpMode {
-
+public class RedWarehouseS extends LinearOpMode {
 
      DcMotor leftFront;
      DcMotor rightFront;
@@ -18,15 +16,10 @@ public class RedWarehouse extends LinearOpMode {
      DcMotor rightBack;
      DcMotor spinMotor;
 
-
-
-    //ENcoder Positions
-
      int leftFrontPos;
      int rightFrontPos;
      int leftBackPos;
      int rightBackPos;
-
 
     @Override
     public void runOpMode() {
@@ -36,7 +29,6 @@ public class RedWarehouse extends LinearOpMode {
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
 
-
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -45,11 +37,6 @@ public class RedWarehouse extends LinearOpMode {
         leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-
-        //IN CASE A WHEEL OR MOTOR IS REVERSED USED THIS
-        //leftFront.setDirection((DcMotorSimple.Direction.REVERSE));
-
-
         leftFrontPos = 0;
         rightFrontPos = 0;
         leftBackPos = 0;
@@ -57,18 +44,23 @@ public class RedWarehouse extends LinearOpMode {
 
         waitForStart();
 
+        //moving to the side
+        drive(-38*24, 38*24, 38*24, -38*24, .3);
+        //up
+        drive(-38*15, -38*15, -38*15, -38*15, .3);
 
-        //drive(1000, 1000, -1000, 1000, 0.25);
-        // the first number will move the leftfront wheel 1000 ticks, the 2nd will move the righfront wheel backwards 100 ticks, and so on
-        //the last number, (0.25 in this case) will make them move at a speed of 0.25
+        //ARM
+
+        //move back a little
+        drive(38*5, 38*5, 38*5, 38*5, .3);
+        //rotate
+        drive(38*29, -38*29, 38*29, -38*29, .25);
+        //left
+        drive(38*10, -38*10, -38*10, 38*10, .25);
+        //to storage
+        drive(-38*72, -38*72, -38*72, -38*72, .3);
 
 
-        //1 inch is 38
-
-        //turning
-        drive(-38*14, -38*14, -38*14, -38*14, .25);
-        drive(-38*26, 38*26, -38*26, 38*26, .15);
-        drive(-38*60, -38*60, -38*60, -38*60, 1);
     }
 
     private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {
@@ -95,8 +87,5 @@ public class RedWarehouse extends LinearOpMode {
         while (opModeIsActive() && leftFront.isBusy() && rightFront.isBusy() && leftBack.isBusy() && rightBack.isBusy()) {
             idle();
         }
-
-
     }
 }
-

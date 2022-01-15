@@ -3,14 +3,13 @@ package org.firstinspires.ftc.teamcode.TeleOperated;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-@TeleOp(name="MAINTeleop")
-public class MechanumTeleop extends OpMode {
+@TeleOp(name="ServoTest")
+public class ServoTeleopTest extends OpMode {
 
     //motors
     DcMotor leftFront = null;
@@ -25,7 +24,7 @@ public class MechanumTeleop extends OpMode {
 
     //servo
      Servo claw = null;
-     CRServo armServo = null;
+     Servo strong = null;
 
     public boolean turboMode = false;
 
@@ -42,8 +41,6 @@ public class MechanumTeleop extends OpMode {
 
         slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
 
-        armServo = hardwareMap.get(CRServo.class, "armServo");
-
         leftFront.setPower(0);
         rightFront.setPower(0);
         rightBack.setPower(0);
@@ -55,9 +52,9 @@ public class MechanumTeleop extends OpMode {
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
         claw = hardwareMap.get(Servo.class, "claw");
-        claw.setPosition(0.0);
+        strong = hardwareMap.get(Servo.class, "strong");
 
-        armServo = hardwareMap.get(CRServo.class, "armServo");
+        claw.setPosition(0.0);
     }
 
     @Override
@@ -88,35 +85,14 @@ public class MechanumTeleop extends OpMode {
 
 
             //Carasol mover
-        spinMotor.setPower(gamepad2.left_trigger/1.8 - gamepad2.right_trigger/1.8);
+        spinMotor.setPower(gamepad2.left_trigger - gamepad2.right_trigger);
+
+        strong.setPosition(gamepad2.left_stick_x);
+
+        slideMotor.setPower(gamepad1.left_stick_y);
 
 
 
-
-        armServo.setPower(gamepad2.left_stick_y/1.5);
-        armServo.setPower(gamepad2.right_stick_y*-1);
-
-
-
-
-        //claw
-
-
-        if (gamepad2.x == true) {
-                claw.setPosition(1.0);
-        } else if (gamepad2.b == true) {
-                claw.setPosition(0.0);
-        }
-
-            //movingClaw
-
-        if (gamepad2.dpad_up == true) {
-            movingClaw.setPower(0.7);
-        }
-        if (gamepad2.dpad_down == true) {
-            movingClaw.setPower(-0.7);
-
-        }
 
     }
 }

@@ -42,7 +42,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
-@Autonomous(name = " ACTUAL TensorFlow Object Detection Webcam", group = "Concept")
+@Autonomous(name = " ACTUAL TensorFlow Oooobject Detection Webcam", group = "Concept")
 @Disabled
 
 public class OpenCV_Test_Blue_Only_2 extends LinearOpMode {
