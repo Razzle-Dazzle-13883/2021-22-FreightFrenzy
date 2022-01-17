@@ -121,7 +121,7 @@ public class VisionSensor extends LinearOpMode {
             int a = 0;
             int b = 0;
             int c = 0;
-            while (counter <= 35) {
+            while (counter <= 5) {
                 if (tfod != null) {
                     // getUpdatedRecognitions() will return null if no new information is available since
                     // the last time that call was made.
@@ -173,7 +173,7 @@ public class VisionSensor extends LinearOpMode {
                 telemetry.update();
             }
 
-            sleep(10000);
+            sleep(5000);
         }
 
         if (tfod != null) {

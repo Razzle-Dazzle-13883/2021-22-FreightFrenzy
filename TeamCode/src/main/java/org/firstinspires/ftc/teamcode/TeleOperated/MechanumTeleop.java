@@ -92,9 +92,12 @@ public class MechanumTeleop extends OpMode {
 
 
 
+        int suuu = 1;
 
-        armServo.setPower(gamepad2.left_stick_y/1.5);
-        armServo.setPower(gamepad2.right_stick_y*-1);
+
+
+        armServo.setPower(gamepad2.left_stick_y);
+        armServo.setPower((gamepad2.right_stick_y*-1));
 
 
 
