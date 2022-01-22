@@ -1,15 +1,14 @@
-package org.firstinspires.ftc.teamcode.Autonomous.BigChassis.Red;
+package org.firstinspires.ftc.teamcode.Autonomous.SmallChassis.Red.Duck;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "RedDuck")
+@Autonomous(name = "RedDuckS")
 
-public class RedDuck extends LinearOpMode {
+public class RedDuckS extends LinearOpMode {
 
 
      DcMotor leftFront;
@@ -65,11 +64,11 @@ public class RedDuck extends LinearOpMode {
         //going up
         drive(-38*8, -38*8, -38*8, -38*8, .25);
         //turn
-        drive(-38*29, 38*29, -38*29, 38*29, .15);
+        drive(-38*24, 38*24, -38*24, 38*24, .15);
         //down
         drive(38*32, 38*32, 38*32, 38*32, .25);
         //move closer to carasouel
-        drive(-38*4, 38*4, 38*4, -38*4, .15);
+        drive(-38*10, 38*10, 38*10, -38*10, .15);
 
 
         spinMotor.setPower(-.70);

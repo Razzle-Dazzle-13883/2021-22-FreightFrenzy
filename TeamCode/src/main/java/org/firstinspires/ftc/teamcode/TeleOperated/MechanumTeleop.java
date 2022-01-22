@@ -19,13 +19,12 @@ public class MechanumTeleop extends OpMode {
     DcMotor rightBack = null;
 
     DcMotor spinMotor = null;
-    DcMotor slideMotor = null;
 
     DcMotor movingClaw = null;
 
     //servo
      Servo claw = null;
-     CRServo armServo = null;
+     Servo magnetArm = null;
 
     public boolean turboMode = false;
 
@@ -40,9 +39,8 @@ public class MechanumTeleop extends OpMode {
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
         movingClaw = hardwareMap.get(DcMotor.class, "movingClaw");
 
-        slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
 
-        armServo = hardwareMap.get(CRServo.class, "armServo");
+
 
         leftFront.setPower(0);
         rightFront.setPower(0);
@@ -50,14 +48,13 @@ public class MechanumTeleop extends OpMode {
         leftBack.setPower(0);
         spinMotor.setPower(0);
 
-        slideMotor.setPower(0);
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
         claw = hardwareMap.get(Servo.class, "claw");
         claw.setPosition(0.0);
+        magnetArm = hardwareMap.get(Servo.class, "magnetArm");
 
-        armServo = hardwareMap.get(CRServo.class, "armServo");
     }
 
     @Override
@@ -69,7 +66,7 @@ public class MechanumTeleop extends OpMode {
         double r = -gamepad1.right_stick_x;
         if (turboMode) {
             leftFront.setPower((x + y + r) / 1.5);
-            leftBack.setPower((x - y - r)  / 1.5);
+            leftBack.setPower((x - y - r) / 1.5);
             rightFront.setPower((x - y + r) / 1.5);
             rightBack.setPower((x + y + r) / 1.5);
         } else {
@@ -79,47 +76,40 @@ public class MechanumTeleop extends OpMode {
             rightBack.setPower((x + y - r) / 3.7);
         }
 
-            //Fastmode and slowmode
+        //Fastmode and slowmode
         if (gamepad1.y == true) {
-                turboMode = true;
-            } else if (gamepad1.a == true) {
-                turboMode = false;
-            }
+            turboMode = true;
+        } else if (gamepad1.a == true) {
+            turboMode = false;
+        }
 
-
-            //Carasol mover
-        spinMotor.setPower(gamepad2.left_trigger/1.8 - gamepad2.right_trigger/1.8);
-
-
-
-        int suuu = 1;
-
-
-
-        armServo.setPower(gamepad2.left_stick_y);
-        armServo.setPower((gamepad2.right_stick_y*-1));
-
-
-
-
-        //claw
-
+        //Carasol mover
+        spinMotor.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
 
         if (gamepad2.x == true) {
-                claw.setPosition(1.0);
+            claw.setPosition(9.0);
         } else if (gamepad2.b == true) {
-                claw.setPosition(0.0);
+            claw.setPosition(0.0);
         }
 
-            //movingClaw
+        if (gamepad2.dpad_up) {
+            movingClaw.setTargetPosition(-130);
+            movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            movingClaw.setPower(.4);
+        } else if (gamepad2.dpad_down) {
+            movingClaw.setPower(0);
+        } else if (gamepad2.dpad_left) {
+            movingClaw.setTargetPosition(73);
+            movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            movingClaw.setPower(.4);
+        } else if (gamepad2.dpad_right) {
+            movingClaw.setTargetPosition(20);
+            movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            movingClaw.setPower(.4);
 
-        if (gamepad2.dpad_up == true) {
-            movingClaw.setPower(0.7);
+
+        }else {
+            movingClaw.setPower(0);
         }
-        if (gamepad2.dpad_down == true) {
-            movingClaw.setPower(-0.7);
 
-        }
-
-    }
-}
+    }}

@@ -42,6 +42,23 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
         sleep(3000);
 
+        rightFront.setPower(-1.0);
+        rightBack.setPower(-1.0);
+        leftFront.setPower(1.0);
+        leftBack.setPower(1.0);
+
+        sleep(2000);
+
+        rightFront.setPower(-1.0);
+        rightBack.setPower(-1.0);
+        leftFront.setPower(-1.0);
+        leftBack.setPower(-1.0);
+
+        sleep(3000);
+
+
+
+
 
     }
 }

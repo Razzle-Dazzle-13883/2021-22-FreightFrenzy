@@ -1,15 +1,15 @@
-package org.firstinspires.ftc.teamcode.Autonomous.BigChassis.Red;
+package org.firstinspires.ftc.teamcode.Autonomous.SmallChassis.BlueRemote;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "RedDuck")
+@Autonomous(name = "RedDuckS")
 
-public class RedDuck extends LinearOpMode {
+public class BlueRemoteDuck extends LinearOpMode {
 
 
      DcMotor leftFront;
@@ -17,6 +17,9 @@ public class RedDuck extends LinearOpMode {
      DcMotor leftBack;
      DcMotor rightBack;
      DcMotor spinMotor;
+     DcMotor movingClaw;
+
+     Servo claw = null;
 
 
      int leftFrontPos;
@@ -32,10 +35,14 @@ public class RedDuck extends LinearOpMode {
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
+        movingClaw = hardwareMap.get(DcMotor.class, "movingClaw");
 
 
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        claw = hardwareMap.get(Servo.class, "claw");
+        claw.setPosition(1.0);
 
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -62,28 +69,41 @@ public class RedDuck extends LinearOpMode {
 
         //1 inch is 38
 
-        //going up
-        drive(-38*8, -38*8, -38*8, -38*8, .25);
-        //turn
-        drive(-38*29, 38*29, -38*29, 38*29, .15);
-        //down
-        drive(38*32, 38*32, 38*32, 38*32, .25);
-        //move closer to carasouel
-        drive(-38*4, 38*4, 38*4, -38*4, .15);
+        //going up a bit
+        drive(-38*4, -38*4, -38*4, -38*4, .7);
 
+        drive(38*6, -38*6, 38*6, -38*6, .25);
+
+        //ARM
+        movingClaw.setTargetPosition(-130);
+        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movingClaw.setPower(.4);
+
+        //closer to hub
+        drive(-38*8, -38*8, -38*8, -38*8, .3);
+        claw.setPosition(0.0);
+
+        movingClaw.setPower(0);
+
+
+        drive(38*8, 38*8, 38*8, 38*8, .6);   //back away
+
+        drive(38*20, -38*20, 38*20, -38*20, .25); //turn more
+
+        drive(38*12, 38*12, 38*12, 38*12, .6); //move down
+
+        drive(38*4, -38*4, -38*4, 38*4, .3);  //move closer to the carasouel
 
         spinMotor.setPower(-.70);
-        sleep(5000);
+        sleep(4500);
         spinMotor.setPower(0);
-        sleep(2000);
-        //goes back
-        //drive(38*5, -38*5, -38*5, 38*5, .25);
+        sleep(1000);
 
-       // drive(38*5, 38*5, 38*5, 38*5, .25);
+        drive(-38*8, -38*8, -38*8, -38*8, .7);
 
+        drive(-38*15, 0, 0, -38*15, .4);
 
-        drive(38*26, -38*26, -38*26, 38*26, .25);
-
+        drive(-38*70, -38*70, -38*70, -38*70, .7);
     }
 
     private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {

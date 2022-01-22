@@ -5,26 +5,25 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 
 
-@TeleOp(name="ServoTest")
-public class ServoTeleopTest extends OpMode {
+@TeleOp(name="EncoderArm")
+public class EncoderArmTeleop extends OpMode {
 
     //motors
     DcMotor leftFront = null;
     DcMotor rightFront = null;
     DcMotor leftBack = null;
     DcMotor rightBack = null;
-
     DcMotor spinMotor = null;
     DcMotor slideMotor = null;
-
     DcMotor movingClaw = null;
 
     //servo
-     Servo claw = null;
-     Servo strong = null;
+
+
+     //Encoder Positions
+
 
     public boolean turboMode = false;
 
@@ -35,10 +34,8 @@ public class ServoTeleopTest extends OpMode {
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
-
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
         movingClaw = hardwareMap.get(DcMotor.class, "movingClaw");
-
         slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
 
         leftFront.setPower(0);
@@ -46,15 +43,16 @@ public class ServoTeleopTest extends OpMode {
         rightBack.setPower(0);
         leftBack.setPower(0);
         spinMotor.setPower(0);
-
         slideMotor.setPower(0);
+
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        claw = hardwareMap.get(Servo.class, "claw");
-        strong = hardwareMap.get(Servo.class, "strong");
+        movingClaw.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        claw.setPosition(0.0);
+
+
+
     }
 
     @Override
@@ -85,12 +83,29 @@ public class ServoTeleopTest extends OpMode {
 
 
             //Carasol mover
-        spinMotor.setPower(gamepad2.left_trigger - gamepad2.right_trigger);
 
-        strong.setPosition(gamepad2.left_stick_x);
 
-        slideMotor.setPower(gamepad1.left_stick_y);
 
+
+
+
+
+
+
+        //movingClaw
+        if (gamepad2.dpad_up) {
+            movingClaw.setTargetPosition(-130);
+            movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            movingClaw.setPower(.4);
+        } else if (gamepad2.dpad_down) {
+            movingClaw.setTargetPosition(5);
+            movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            movingClaw.setPower(.4);
+        }
+
+
+
+// move arm to position
 
 
 

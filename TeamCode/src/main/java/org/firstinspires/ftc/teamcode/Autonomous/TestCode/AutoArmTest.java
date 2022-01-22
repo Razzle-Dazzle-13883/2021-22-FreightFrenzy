@@ -37,26 +37,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
         sleep(500);
 
-        armServo.setPower(0.1);
-        sleep(1000);
-        armServo.setPower(0.2);
-        sleep(1000);
-        armServo.setPower(0.3);
-        sleep(1000);
-        armServo.setPower(0.4);
-        sleep(1000);
         armServo.setPower(0.5);
         sleep(1000);
-        armServo.setPower(0.6);
-        sleep(1000);
-        armServo.setPower(0.7);
-        sleep(1000);
-        armServo.setPower(0.8);
-        sleep(1000);
-        armServo.setPower(0.9);
-        sleep(1000);
-        armServo.setPower(1);
-        sleep(1000);
+        armServo.setPower(0.5);
+        sleep(2000);
+        armServo.setPower(0.5);
+        sleep(2000);
+
 
 
 
