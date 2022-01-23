@@ -106,8 +106,6 @@ public class MechanumTeleop extends OpMode {
             movingClaw.setTargetPosition(20);
             movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             movingClaw.setPower(.4);
-
-
         }else {
             movingClaw.setPower(0);
         }

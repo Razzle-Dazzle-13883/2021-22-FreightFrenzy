@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "REMOTEBLUE")
+@Autonomous(name = "ARMTEST")
 
-public class BlueRemoteDuck extends LinearOpMode {
+public class ARMTEST extends LinearOpMode {
 
 
      DcMotor leftFront;
@@ -65,52 +65,13 @@ public class BlueRemoteDuck extends LinearOpMode {
         waitForStart();
 
 
-        //drive(1000, 1000, -1000, 1000, 0.25);
-        // the first number will move the leftfront wheel 1000 ticks, the 2nd will move the righfront wheel backwards 100 ticks, and so on
-        //the last number, (0.25 in this case) will make them move at a speed of 0.25
+        drive(-38*4, -38*4, -38*4, -38*4, .4);
 
-
-        //1 inch is 38
-
-        //going up a bit
-        drive(-38*4, -38*4, -38*4, -38*4, .7);
-
-        drive(38*6, -38*6, 38*6, -38*6, .25);
-
-
-        //ARM
-        movingClaw.setTargetPosition(-130);
-        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        movingClaw.setPower(.4);
-
-        //closer to hub
-        drive(-38*8, -38*8, -38*8, -38*8, .3);
+        armDrive(-38*4, -38*4, -38*4, -38*4, 130, .2);
 
         claw.setPosition(0.0);
 
 
-
-        movingClaw.setPower(0);
-
-
-        drive(38*8, 38*8, 38*8, 38*8, .6);   //back away
-
-        drive(38*20, -38*20, 38*20, -38*20, .25); //turn more
-
-        drive(38*12, 38*12, 38*12, 38*12, .6); //move down
-
-        drive(38*4, -38*4, -38*4, 38*4, .3);  //move closer to the carasouel
-
-        spinMotor.setPower(-.70);
-        sleep(4500);
-        spinMotor.setPower(0);
-        sleep(1000);
-
-        drive(-38*8, -38*8, -38*8, -38*8, .7);
-
-        drive(-38*15, 0, 0, -38*15, .4);
-
-        drive(-38*70, -38*70, -38*70, -38*70, .7);
     }
 
     private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {
@@ -139,16 +100,7 @@ public class BlueRemoteDuck extends LinearOpMode {
         }
     }
 
-    private void armTopPos() {
-        movingClaw.setTargetPosition(-130);
-        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        movingClaw.setPower(.4);
 
-        while(movingClaw.isBusy()) {
-            idle();
-        }
-
-    }
     private void armDrive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, int armTarget, double speed ) {
         leftFrontPos += leftFrontTarget;
         rightFrontPos += rightFrontTarget;
