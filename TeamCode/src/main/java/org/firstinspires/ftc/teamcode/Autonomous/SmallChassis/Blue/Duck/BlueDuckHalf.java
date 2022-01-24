@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.Autonomous.SmallChassis.Blue.Duck;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Autonomous(name = "BlueDuckSRemote")
+@Disabled
 
 public class BlueDuckHalf extends LinearOpMode {
 

@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "RedDuck")
+@Autonomous(name = "ACTUALQUAL1")
 
 public class RedDuck extends LinearOpMode {
 
@@ -65,15 +65,15 @@ public class RedDuck extends LinearOpMode {
         //going up
         drive(-38*8, -38*8, -38*8, -38*8, .25);
         //turn
-        drive(-38*29, 38*29, -38*29, 38*29, .15);
+        drive(-38*27, 38*27, -38*27, 38*29, .15);
         //down
         drive(38*32, 38*32, 38*32, 38*32, .25);
         //move closer to carasouel
-        drive(-38*4, 38*4, 38*4, -38*4, .15);
+        drive(-38*17, 38*17, 38*17, -38*17, .25);
 
 
-        spinMotor.setPower(-.70);
-        sleep(5000);
+        spinMotor.setPower(1);
+        sleep(6000);
         spinMotor.setPower(0);
         sleep(2000);
         //goes back
@@ -82,7 +82,7 @@ public class RedDuck extends LinearOpMode {
        // drive(38*5, 38*5, 38*5, 38*5, .25);
 
 
-        drive(38*26, -38*26, -38*26, 38*26, .25);
+        drive(38*28, -38*28, -38*28, 38*28, .25);
 
     }
 

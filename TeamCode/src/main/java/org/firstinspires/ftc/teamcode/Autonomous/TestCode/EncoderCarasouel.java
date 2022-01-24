@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "BaseEncoder")
+@Autonomous(name = "CaraEncoder")
 @Disabled
 public class EncoderCarasouel extends LinearOpMode {
 
@@ -66,6 +66,7 @@ public class EncoderCarasouel extends LinearOpMode {
 
         carousel(360,1);
 
+        carousel(-360,1);
 
 
     }

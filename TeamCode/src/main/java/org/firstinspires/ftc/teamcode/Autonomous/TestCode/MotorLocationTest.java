@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 @Autonomous(name = "MotorLocationTest")
-@Disabled
 
 public class MotorLocationTest extends LinearOpMode {
     private DcMotor rightFront;
@@ -63,6 +62,58 @@ public class MotorLocationTest extends LinearOpMode {
         rightBack.setPower(0.0);
         leftFront.setPower(0.0);
         leftBack.setPower(1.0);
+
+        sleep(3000);
+
+        rightFront.setPower(0.0);
+        rightBack.setPower(0.0);
+        leftFront.setPower(0.0);
+        leftBack.setPower(0.0);
+
+        sleep(3000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //rightfront
+        rightFront.setPower(-1.0);
+        rightBack.setPower(0.0);
+        leftFront.setPower(0.0);
+        leftBack.setPower(0.0);
+
+        sleep(3000);
+
+        //rightback
+        rightFront.setPower(0.0);
+        rightBack.setPower(-1.0);
+        leftFront.setPower(0.0);
+        leftBack.setPower(0.0);
+
+        sleep(3000);
+
+        //left front
+        rightFront.setPower(0.0);
+        rightBack.setPower(0.0);
+        leftFront.setPower(-1.0);
+        leftBack.setPower(0.0);
+
+        sleep(3000);
+
+        //left back
+
+        rightFront.setPower(0.0);
+        rightBack.setPower(0.0);
+        leftFront.setPower(0.0);
+        leftBack.setPower(-1.0);
 
         sleep(3000);
 

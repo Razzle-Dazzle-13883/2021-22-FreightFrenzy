@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Autonomous(name = "BlueWarehouseS")
+@Disabled
+
 public class BlueWarehouseS extends LinearOpMode {
 
      DcMotor leftFront;

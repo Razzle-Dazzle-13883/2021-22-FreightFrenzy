@@ -65,10 +65,10 @@ public class MechanumTeleop extends OpMode {
         double y = -gamepad1.left_stick_x;
         double r = -gamepad1.right_stick_x;
         if (turboMode) {
-            leftFront.setPower((x + y + r) / 1.5);
-            leftBack.setPower((x - y - r) / 1.5);
-            rightFront.setPower((x - y + r) / 1.5);
-            rightBack.setPower((x + y + r) / 1.5);
+            leftFront.setPower((x + y + r) / 2.5);
+            leftBack.setPower((x - y - r) / 2.5);
+            rightFront.setPower((x - y + r) / 2.5);
+            rightBack.setPower((x + y + r) / 2.5);
         } else {
             leftFront.setPower((x + y + r) / 3.7);
             leftBack.setPower((x - y + r) / 3.7);
@@ -85,6 +85,11 @@ public class MechanumTeleop extends OpMode {
 
         //Carasol mover
         spinMotor.setPower(gamepad2.right_trigger - gamepad2.left_trigger);
+
+
+        double armPos = .5 + ((-1 * gamepad2.right_stick_y) / 2);
+        magnetArm.setPosition(armPos);
+
 
         if (gamepad2.x == true) {
             claw.setPosition(9.0);
@@ -106,8 +111,8 @@ public class MechanumTeleop extends OpMode {
             movingClaw.setTargetPosition(20);
             movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             movingClaw.setPower(.4);
-        }else {
-            movingClaw.setPower(0);
         }
 
-    }}
+
+    }
+}

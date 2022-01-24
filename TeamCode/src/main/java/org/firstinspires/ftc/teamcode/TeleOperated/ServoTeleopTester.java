@@ -1,10 +1,13 @@
 package org.firstinspires.ftc.teamcode.TeleOperated;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp()
+@Disabled
+
 public class ServoTeleopTester extends OpMode {
     Servo armServo;
     @Override

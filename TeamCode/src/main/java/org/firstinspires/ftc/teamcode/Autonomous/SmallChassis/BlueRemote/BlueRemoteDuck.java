@@ -2,12 +2,14 @@ package org.firstinspires.ftc.teamcode.Autonomous.SmallChassis.BlueRemote;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous(name = "REMOTEBLUE")
+@Disabled
 
 public class BlueRemoteDuck extends LinearOpMode {
 
@@ -49,6 +51,7 @@ public class BlueRemoteDuck extends LinearOpMode {
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        movingClaw.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
         //IN CASE A WHEEL OR MOTOR IS REVERSED USED THIS
@@ -73,9 +76,9 @@ public class BlueRemoteDuck extends LinearOpMode {
         //1 inch is 38
 
         //going up a bit
-        drive(-38*4, -38*4, -38*4, -38*4, .7);
+        drive(38*4, 38*4, 38*4, 38*4, .7);
 
-        drive(38*6, -38*6, 38*6, -38*6, .25);
+        drive(-38*6, 38*6, -38*6, 38*6, .25);
 
 
         //ARM
