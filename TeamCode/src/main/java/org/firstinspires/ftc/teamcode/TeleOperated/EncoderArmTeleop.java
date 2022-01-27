@@ -63,7 +63,7 @@ public class EncoderArmTeleop extends OpMode {
         double y = -gamepad1.left_stick_x;
         double r = -gamepad1.right_stick_x;
         if (turboMode) {
-            leftFront.setPower((x + y + r) / 1.5);
+            leftFront.setPower((x + y + r) / 1.4);
             leftBack.setPower((x - y - r)  / 1.5);
             rightFront.setPower((x - y + r) / 1.5);
             rightBack.setPower((x + y + r) / 1.5);
