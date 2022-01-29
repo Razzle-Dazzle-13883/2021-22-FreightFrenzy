@@ -27,11 +27,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Autonomous.TestCode;
+package org.firstinspires.ftc.teamcode.Autonomous.Camera;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
@@ -43,37 +44,32 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
-@Autonomous(name = "VisionSensor", group = "Concept")
+@Autonomous(name = "WebcamDetection")
+public class WebcamDetection extends LinearOpMode {
+    private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/remoteEvent.tflite";
+    private static final String[] LABELS = {
+            "CappingElement"
+    };
 
-public class VisionSensor extends LinearOpMode {
+    private static final String VUFORIA_KEY =
+            "AQ5Ga0r/////AAABmY3dPUqJZE+9lWYfmEZA8GxAAge/a1bHQ8udF/kH7f+UjIKGtq1629AE2grZt0+aJjE2DUw3Vd7X6lP23pVERIZtyIHHEqjz5/6o2Fvnjh0Hi3Bc34cG8W8JBoxzq8PDJ6ucRNP83vFx4dyaBuu/S3Il+YyDbTPnMC0eGdjWMyolP9d82QW2b/rsrJln8qnQIoI0qBV2YbUrV/5xyNZ9f+eyOhk3X/hgNsRKFoexNZERZbYxEU3d37adTXMMY6m2msmOP+H9/PLpgMMe1hRfrQbL+iNmLPVZqPZaRevhDFa57biNixyRuH8wERJlHI49BvrNeGshYa7yaQnNU7eGjSiyZt6DvopUXWXiyIqlcuM6\n";
 
-    DcMotor rightFront;
-    DcMotor rightBack;
+    private VuforiaLocalizer vuforia;
+    private TFObjectDetector tfod;
+
+
     DcMotor leftFront;
+    DcMotor rightFront;
     DcMotor leftBack;
-
+    DcMotor rightBack;
     DcMotor spinMotor;
+    DcMotor movingClaw;
 
     int leftFrontPos;
     int rightFrontPos;
     int leftBackPos;
     int rightBackPos;
 
-
-    private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/blue.tflite";
-    private static final String[] LABELS = {
-      "LEVEL1",
-      "LEVEL2",
-      "LEVEL3"
-    };
-
-    private static final String VUFORIA_KEY =
-            "Adahhfr/////AAABmRGLi4HJekbOoQzn7r/yjGgIS3VZVB/CZv99kmxg6FzRwsRVPCTlx7vC2DVesU8VloA/tPCHGWGPPmEGYyTi95LyPIGNI1Rr2f/dJu5VVibtpiPexoU1OuAk/dOQZwMpCKuBBmJBaSEMvLvwYe8Bvu1k5oms7r+2a1kXBLuZhXMRRhIUcQ2dI+BYpWX1SN4XkBnpjCyxbI1mM3jFHk1nZdXvto4FkuCTK3cTs4saljczQlOqBPNhqwKPx2PiBc0HnJB6EN93RBUyiqzjNIO/24a+NIFeyq3Vt+Y6jvABriqWWSBJOWyqAqibSoQjDrUcaA30vn0F4FMU2EOtqNOKM0SMTwXKKpleop/qzMkoJOF2";
-
-    private VuforiaLocalizer vuforia;
-
-
-    private TFObjectDetector tfod;
 
     @Override
     public void runOpMode() {
@@ -82,26 +78,26 @@ public class VisionSensor extends LinearOpMode {
         rightBack = hardwareMap.dcMotor.get("rightBack");
         leftFront = hardwareMap.dcMotor.get("leftFront");
         leftBack = hardwareMap.dcMotor.get("leftBack");
-        spinMotor = hardwareMap.dcMotor.get("leftBack");
+        spinMotor = hardwareMap.dcMotor.get("spinMotor");
+        movingClaw = hardwareMap.dcMotor.get("movingClaw");
 
-        // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
-        // first.
+
         initVuforia();
         initTfod();
 
         if (tfod != null) {
             tfod.activate();
 
+
             tfod.setZoom(1, 16.0/9.0);
         }
 
-        /** Wait for the game to begin */
-        telemetry.addData(">", "Press Play to start op mode");
-        telemetry.update();
+
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        movingClaw.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
-        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -113,6 +109,12 @@ public class VisionSensor extends LinearOpMode {
         leftBackPos = 0;
         rightBackPos = 0;
 
+
+        telemetry.addData(">", "DONE INTIALIZING | CHECK CAMERA STREAM FOR POSITION");
+        //telemetry.addData("LEFTPOS", recognition.getLeft());
+        telemetry.update();
+
+
         waitForStart();
 
         if (opModeIsActive()) {
@@ -120,73 +122,60 @@ public class VisionSensor extends LinearOpMode {
             int a = 0;
             int b = 0;
             int c = 0;
-            while (counter <= 5) {
+            while (counter <= 3) {
+            while (opModeIsActive()) {
                 if (tfod != null) {
                     // getUpdatedRecognitions() will return null if no new information is available since
                     // the last time that call was made.
                     List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
                     if (updatedRecognitions != null) {
-                        telemetry.addData("# Object Detected", updatedRecognitions.size());
-                        if (updatedRecognitions.size() == 0 ) {
-                            // empty list.  no objects recognized.
-                            telemetry.addData("TFOD", "No items detected.");
-                            c += 1;
-                        } else {
-                            // list is not empty.
-                            // step through the list of recognitions and display boundary info.
-                            int i = 0;
-                            for (Recognition recognition : updatedRecognitions) {
-                                telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
-                                telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
-                                        recognition.getLeft(), recognition.getTop());
-                                telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
-                                        recognition.getRight(), recognition.getBottom());
+                      telemetry.addData("# Object Detected", updatedRecognitions.size());
+                      // step through the list of recognitions and display boundary info.
+                      int i = 0;
+                      for (Recognition recognition : updatedRecognitions) {
+                        telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
+                        telemetry.addData(String.format("  left,top (%d)", i), "%.03f , %.03f",
+                                recognition.getLeft(), recognition.getTop());
+                        telemetry.addData(String.format("  right,bottom (%d)", i), "%.03f , %.03f",
+                                recognition.getRight(), recognition.getBottom());
 
-                                // check label to see which target zone to go after.
-                                if (recognition.getLabel().equals("LEVEL1")) {
-                                    telemetry.addData("LEVEL1", "1");
-                                    a += 1;
-                                } else if (recognition.getLabel().equals("LEVEL2")) {
-                                    telemetry.addData("LEVEL2", "2");
-                                    b += 1;
-                                } else if (recognition.getLabel().equals("LEVEL3")) {
-                                telemetry.addData("LEVEL3", "3");
-                                    c += 1;
-                                }
-                            }
+
+
+                        //POTENCIAL ISSUE WITH GET LEFT NOT GETTING THE LABEL
+                        if (recognition.getLeft() < 300) {
+                            telemetry.addData("LEVEL1", recognition.getLeft());
+                            a += 1; //level1
+                        } else if (recognition.getLeft() > 800) {
+                            telemetry.addData("LEVEL3", recognition.getLeft());
+                            c += 1;  //level3
+                        } else {
+                            telemetry.addData("LEVEL2", recognition.getLeft());
+                            b += 1;  //level2
                         }
 
-                        telemetry.update();
-                        counter += 1;
+
+
+                        i++;
+                      }
+                      telemetry.update();
                     }
                 }
+                if (a > b && a > c) {
+                    level1();
+                } else if (b > a && b > c){
+                    level2();
+                } else if (c > a && c > b) {
+                    level3();
+                } else{
+                    telemetry.addData("Target Zone", "Unknown");
+                    telemetry.update();
+                }
             }
-            if (a > b && a > c) {
-                targetA();
-            } else if (b > a && b > c){
-                targetB();
-            } else if (c > a && c > b) {
-                targetC();
-            } else{
-                telemetry.addData("Target Zone", "Unknown");
-                telemetry.update();
-            }
-
-            sleep(5000);
         }
-
-        if (tfod != null) {
-            tfod.shutdown();
         }
     }
 
-    /**
-     * Initialize the Vuforia localization engine.
-     */
     private void initVuforia() {
-        /*
-         * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
-         */
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
@@ -198,9 +187,6 @@ public class VisionSensor extends LinearOpMode {
         // Loading trackables is not necessary for the TensorFlow Object Detection engine.
     }
 
-    /**
-     * Initialize the TensorFlow Object Detection engine.
-     */
     private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {
         leftFrontPos += leftFrontTarget;
         rightFrontPos += rightFrontTarget;
@@ -229,36 +215,59 @@ public class VisionSensor extends LinearOpMode {
 
     private void initTfod() {
         int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
-                "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+            "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
-        tfodParameters.minResultConfidence = 0.8f;
-        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-        tfod.loadModelFromFile(TFOD_MODEL_ASSET, LABELS);
+       tfodParameters.minResultConfidence = 0.8f;
+       tfodParameters.isModelTensorFlow2 = true;
+       tfodParameters.inputSize = 320;
+       tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
+       tfod.loadModelFromFile(TFOD_MODEL_ASSET, LABELS);
     }
-    //LEVEL 1 (Bottom)
-    public void targetA() {
-        telemetry.addData("Status", "LEVEL1");
+
+    //BOTTOM
+    public void level1() {
+        telemetry.addData("Bottom:", "LEVEL1");
         telemetry.update();
+
+        drive(38*10, 38*10, 38*10, 38*10, .25);        //Move Backwords To Carasouel
+
+        movingClaw.setTargetPosition(30);
+        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movingClaw.setPower(.4);
+        sleep(1000);
 
         //drive(-38*24, 38*24, 38*24, -38*24, .3);
     }
 
-    //LEVEL 2 (MID)
-    public void targetB() {
-        telemetry.addData("Status", "LEVEL2");
+    //MID (LIKE MHA)
+    public void level2() {
+        telemetry.addData("Mid:", "LEVEL2");
         telemetry.update();
-        spinMotor.setPower(-.5);
+        drive(38*10, 38*10, 38*10, 38*10, .25);        //Move Backwords To Carasouel
+
+        movingClaw.setTargetPosition(70);
+        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movingClaw.setPower(.4);
         sleep(500);
+        sleep(1000);
+
 
     }
 
-    //LEVEL 3 (TOP)
-    public void targetC() {
-        telemetry.addData("Status", "LEVEL3");
+
+    //TOP
+    public void level3() {
+        telemetry.addData("Top:", "LEVEL3");
         telemetry.update();
-        spinMotor.setPower(-.3);
+        drive(38*10, 38*10, 38*10, 38*10, .25);        //Move Backwords To Carasouel
+
+        movingClaw.setTargetPosition(130);
+        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movingClaw.setPower(.3);
         sleep(1500);
 
     }
 
 }
+
+

@@ -1,15 +1,14 @@
-package org.firstinspires.ftc.teamcode.Autonomous.BigChassis.Red;
+package org.firstinspires.ftc.teamcode.Autonomous.Remote.ArmPosTests;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "RedWarehouse")
-@Disabled
-public class RedWarehouse extends LinearOpMode {
+@Autonomous(name = "ARMBOTTOM")
+public class ARMBOTTOM extends LinearOpMode {
 
 
      DcMotor leftFront;
@@ -17,15 +16,15 @@ public class RedWarehouse extends LinearOpMode {
      DcMotor leftBack;
      DcMotor rightBack;
      DcMotor spinMotor;
-
-
-
-    //ENcoder Positions
+     DcMotor movingClaw;
+     Servo claw;
 
      int leftFrontPos;
      int rightFrontPos;
      int leftBackPos;
      int rightBackPos;
+     int spinMotorPos;
+     int movingClawPos;
 
 
     @Override
@@ -35,6 +34,8 @@ public class RedWarehouse extends LinearOpMode {
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
+        movingClaw = hardwareMap.get(DcMotor.class, "movingClaw");
+
 
 
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -55,20 +56,27 @@ public class RedWarehouse extends LinearOpMode {
         leftBackPos = 0;
         rightBackPos = 0;
 
+        claw = hardwareMap.get(Servo.class, "claw");
+        claw.setPosition(.9);
+
         waitForStart();
 
+        movingClaw.setTargetPosition(-40);
+        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movingClaw.setPower(.2);
 
-        //drive(1000, 1000, -1000, 1000, 0.25);
-        // the first number will move the leftfront wheel 1000 ticks, the 2nd will move the righfront wheel backwards 100 ticks, and so on
-        //the last number, (0.25 in this case) will make them move at a speed of 0.25
+        movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        drive(-38*10, -38*10, -38*10, -38*10, .25);    //Move to Warehouse
+        claw.setPosition(0.1);
+        drive(38*5, 38*5, 38*5, 38*5, .25);    //Move to Warehouse
+
+        movingClaw.setTargetPosition(0);
+        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movingClaw.setPower(.35);
+        movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
 
-        //1 inch is 38
-
-        //turning
-        drive(-38*14, -38*14, -38*14, -38*14, .25);
-        drive(-38*26, 38*26, -38*26, 38*26, .15);
-        drive(-38*60, -38*60, -38*60, -38*60, 1);
     }
 
     private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {

@@ -1,25 +1,31 @@
-package org.firstinspires.ftc.teamcode.Autonomous.SmallChassis.Red.Warehouse;
+package org.firstinspires.ftc.teamcode.Autonomous.Remote.ArmPosTests;
+
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "RedWarehouseS")
-@Disabled
-public class RedWarehouseS extends LinearOpMode {
+@Autonomous(name = "ARMTOP")
+public class ARMTOP extends LinearOpMode {
+
 
      DcMotor leftFront;
      DcMotor rightFront;
      DcMotor leftBack;
      DcMotor rightBack;
      DcMotor spinMotor;
+     DcMotor movingClaw;
+     Servo claw;
 
      int leftFrontPos;
      int rightFrontPos;
      int leftBackPos;
      int rightBackPos;
+     int spinMotorPos;
+     int movingClawPos;
+
 
     @Override
     public void runOpMode() {
@@ -28,6 +34,9 @@ public class RedWarehouseS extends LinearOpMode {
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
+        movingClaw = hardwareMap.get(DcMotor.class, "movingClaw");
+
+
 
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -37,28 +46,35 @@ public class RedWarehouseS extends LinearOpMode {
         leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+
+        //IN CASE A WHEEL OR MOTOR IS REVERSED USED THIS
+        //leftFront.setDirection((DcMotorSimple.Direction.REVERSE));
+
+
         leftFrontPos = 0;
         rightFrontPos = 0;
         leftBackPos = 0;
         rightBackPos = 0;
 
+        claw = hardwareMap.get(Servo.class, "claw");
+        claw.setPosition(.9);
+
         waitForStart();
 
-        //moving to the side
-        drive(-38*24, 38*24, 38*24, -38*24, .3);
-        //up
-        drive(-38*15, -38*15, -38*15, -38*15, .3);
+        movingClaw.setTargetPosition(-130);
+        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movingClaw.setPower(.2);
 
-        //ARM
+        movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        //move back a little
-        drive(38*5, 38*5, 38*5, 38*5, .3);
-        //rotate
-        drive(38*29, -38*29, 38*29, -38*29, .25);
-        //left
-        drive(38*10, -38*10, -38*10, 38*10, .25);
-        //to storage
-        drive(-38*72, -38*72, -38*72, -38*72, .3);
+        drive(-38*10, -38*10, -38*10, -38*10, .25);    //Move to Warehouse
+        claw.setPosition(0.1);
+        drive(38*5, 38*5, 38*5, 38*5, .25);    //Move to Warehouse
+
+        movingClaw.setTargetPosition(0);
+        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movingClaw.setPower(.35);
+        movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
 
     }
@@ -87,5 +103,8 @@ public class RedWarehouseS extends LinearOpMode {
         while (opModeIsActive() && leftFront.isBusy() && rightFront.isBusy() && leftBack.isBusy() && rightBack.isBusy()) {
             idle();
         }
+
+
     }
 }
+
