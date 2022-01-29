@@ -35,6 +35,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -46,6 +47,7 @@ import java.util.List;
 
 @Autonomous(name = "WebcamDetection")
 public class WebcamDetection extends LinearOpMode {
+
     private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/remoteEvent.tflite";
     private static final String[] LABELS = {
             "CappingElement"
@@ -64,6 +66,7 @@ public class WebcamDetection extends LinearOpMode {
     DcMotor rightBack;
     DcMotor spinMotor;
     DcMotor movingClaw;
+    Servo claw;
 
     int leftFrontPos;
     int rightFrontPos;
@@ -80,6 +83,9 @@ public class WebcamDetection extends LinearOpMode {
         leftBack = hardwareMap.dcMotor.get("leftBack");
         spinMotor = hardwareMap.dcMotor.get("spinMotor");
         movingClaw = hardwareMap.dcMotor.get("movingClaw");
+
+        claw = hardwareMap.get(Servo.class, "claw");
+        claw.setPosition(.9);
 
 
         initVuforia();
@@ -103,6 +109,7 @@ public class WebcamDetection extends LinearOpMode {
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        movingClaw.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         leftFrontPos = 0;
         rightFrontPos = 0;
@@ -111,7 +118,6 @@ public class WebcamDetection extends LinearOpMode {
 
 
         telemetry.addData(">", "DONE INTIALIZING | CHECK CAMERA STREAM FOR POSITION");
-        //telemetry.addData("LEFTPOS", recognition.getLeft());
         telemetry.update();
 
 
@@ -130,7 +136,6 @@ public class WebcamDetection extends LinearOpMode {
                     List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
                     if (updatedRecognitions != null) {
                       telemetry.addData("# Object Detected", updatedRecognitions.size());
-                      // step through the list of recognitions and display boundary info.
                       int i = 0;
                       for (Recognition recognition : updatedRecognitions) {
                         telemetry.addData(String.format("label (%d)", i), recognition.getLabel());
@@ -170,8 +175,15 @@ public class WebcamDetection extends LinearOpMode {
                     telemetry.addData("Target Zone", "Unknown");
                     telemetry.update();
                 }
+                telemetry.update();
+                sleep(5000);
             }
+                if (tfod != null) {
+                    tfod.shutdown();
+                }
+
         }
+
         }
     }
 
@@ -213,6 +225,10 @@ public class WebcamDetection extends LinearOpMode {
         }
     }
 
+
+
+
+
     private void initTfod() {
         int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
             "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -224,47 +240,181 @@ public class WebcamDetection extends LinearOpMode {
        tfod.loadModelFromFile(TFOD_MODEL_ASSET, LABELS);
     }
 
+
     //BOTTOM
     public void level1() {
         telemetry.addData("Bottom:", "LEVEL1");
         telemetry.update();
 
-        drive(38*10, 38*10, 38*10, 38*10, .25);        //Move Backwords To Carasouel
 
-        movingClaw.setTargetPosition(30);
+        movingClaw.setTargetPosition(40);
         movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        movingClaw.setPower(.4);
+        movingClaw.setPower(.2);
+
+        movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         sleep(1000);
 
-        //drive(-38*24, 38*24, 38*24, -38*24, .3);
+        drive(-38*7, 38*7, 38*7, -38*7, .25);        //Move Backwords To Carasouel
+
+        drive(-38*30, -38*30, -38*30, -38*30, .15);        //Move Backwords To Carasouel
+
+        //drive(-38*2, -38*2, -38*2, 38*2, .25);        //Move Backwords To Carasouel
+
+
+        sleep(1000);
+
+        spinMotor.setPower(-1);
+        sleep(4000);
+
+        spinMotor.setPower(0);
+        sleep(500);
+
+
+
+        drive(-38*42, 38*42, 38*42, -38*42, .25);        //Move Backwords To Carasouel
+
+        drive(-38*10, -38*10, -38*10, -38*10, .25);
+
+        drive(38*40, 38*40, 38*40, 38*40, .25);
+
+        claw.setPosition(0.0);
+
+        sleep(2000);
+
+        drive(-38*15, -38*15, -38*15, -38*15, .25);        //Move Backwords To Carasouel
+
+        drive(38*50, -38*50, -38*50, 38*50, .25);
+
+        movingClaw.setTargetPosition(0);
+        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movingClaw.setPower(.35);
+        movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+
+        drive(38*30, 0, 0, 38*30, 6);        //Move Backwords To Carasouel
+
+
+        drive(38*100, 38*100, 38*100, 38*100, 6);    //Move to Warehouse
+
+
+
     }
+
 
     //MID (LIKE MHA)
     public void level2() {
         telemetry.addData("Mid:", "LEVEL2");
         telemetry.update();
-        drive(38*10, 38*10, 38*10, 38*10, .25);        //Move Backwords To Carasouel
-
-        movingClaw.setTargetPosition(70);
+        movingClaw.setTargetPosition(75);
         movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        movingClaw.setPower(.4);
-        sleep(500);
+        movingClaw.setPower(.2);
+
+        movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         sleep(1000);
 
+        drive(-38*7, 38*7, 38*7, -38*7, .25);        //Move Backwords To Carasouel
 
+        drive(-38*30, -38*30, -38*30, -38*30, .15);        //Move Backwords To Carasouel
+
+        //drive(-38*2, -38*2, -38*2, 38*2, .25);        //Move Backwords To Carasouel
+
+
+        sleep(1000);
+
+        spinMotor.setPower(-1);
+        sleep(4000);
+
+        spinMotor.setPower(0);
+        sleep(500);
+
+
+
+        drive(-38*42, 38*42, 38*42, -38*42, .25);        //Move Backwords To Carasouel
+
+        drive(-38*10, -38*10, -38*10, -38*10, .25);
+
+        drive(38*40, 38*40, 38*40, 38*40, .25);
+
+        claw.setPosition(0.0);
+
+        sleep(2000);
+
+        drive(-38*15, -38*15, -38*15, -38*15, .25);        //Move Backwords To Carasouel
+
+        drive(38*50, -38*50, -38*50, 38*50, .25);
+
+        movingClaw.setTargetPosition(0);
+        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movingClaw.setPower(.6);
+        movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+
+        drive(38*30, 0, 0, 38*30, 6);        //Move Backwords To Carasouel
+
+
+        drive(38*100, 38*100, 38*100, 38*100, 6);    //Move to Warehouse
     }
+
 
 
     //TOP
     public void level3() {
         telemetry.addData("Top:", "LEVEL3");
         telemetry.update();
-        drive(38*10, 38*10, 38*10, 38*10, .25);        //Move Backwords To Carasouel
-
-        movingClaw.setTargetPosition(130);
+        movingClaw.setTargetPosition(140);
         movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        movingClaw.setPower(.3);
-        sleep(1500);
+        movingClaw.setPower(.2);
+
+        movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        sleep(1000);
+
+        drive(-38*7, 38*7, 38*7, -38*7, .25);        //Move Backwords To Carasouel
+
+        drive(-38*30, -38*30, -38*30, -38*30, .15);        //Move Backwords To Carasouel
+
+        //drive(-38*2, -38*2, -38*2, 38*2, .25);        //Move Backwords To Carasouel
+
+
+        sleep(1000);
+
+        spinMotor.setPower(-1);
+        sleep(4000);
+
+        spinMotor.setPower(0);
+        sleep(500);
+
+
+
+        drive(-38*42, 38*42, 38*42, -38*42, .25);        //Move Backwords To Carasouel
+
+        drive(-38*10, -38*10, -38*10, -38*10, .25);
+
+        drive(38*40, 38*40, 38*40, 38*40, .25);
+
+        claw.setPosition(0.0);
+
+        sleep(2000);
+
+        drive(-38*15, -38*15, -38*15, -38*15, .25);        //Move Backwords To Carasouel
+
+        drive(38*50, -38*50, -38*50, 38*50, .25);
+
+        movingClaw.setTargetPosition(0);
+        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movingClaw.setPower(.6);
+        movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+
+        drive(38*30, 0, 0, 38*30, 6);        //Move Backwords To Carasouel
+
+
+        drive(38*100, 38*100, 38*100, 38*100, 6);    //Move to Warehouse
+
+
+
 
     }
 

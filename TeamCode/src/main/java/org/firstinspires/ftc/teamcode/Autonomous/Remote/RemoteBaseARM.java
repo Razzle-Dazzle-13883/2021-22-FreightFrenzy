@@ -20,7 +20,6 @@ public class RemoteBaseARM extends LinearOpMode {
      int rightFrontPos;
      int leftBackPos;
      int rightBackPos;
-     int spinMotorPos;
 
 
     @Override
