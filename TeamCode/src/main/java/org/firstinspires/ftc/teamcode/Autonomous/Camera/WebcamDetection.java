@@ -148,7 +148,7 @@ public class WebcamDetection extends LinearOpMode {
 
                         //POTENCIAL ISSUE WITH GET LEFT NOT GETTING THE LABEL
                         if (recognition.getLeft() < 300) {
-                            telemetry.addData("LEVEL1", recognition.getLeft());
+                            telemetry.addData("LEVEL3", recognition.getLeft());
                             a += 1; //level1
                         } else if (recognition.getLeft() > 800) {
                             telemetry.addData("LEVEL3", recognition.getLeft());
@@ -166,11 +166,11 @@ public class WebcamDetection extends LinearOpMode {
                     }
                 }
                 if (a > b && a > c) {
-                    level1();
+                    level3();
                 } else if (b > a && b > c){
                     level2();
                 } else if (c > a && c > b) {
-                    level3();
+                    level1();
                 } else{
                     telemetry.addData("Target Zone", "Unknown");
                     telemetry.update();
@@ -247,7 +247,7 @@ public class WebcamDetection extends LinearOpMode {
         telemetry.update();
 
 
-        movingClaw.setTargetPosition(40);
+        movingClaw.setTargetPosition(45);
         movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         movingClaw.setPower(.2);
 
@@ -272,7 +272,7 @@ public class WebcamDetection extends LinearOpMode {
 
 
 
-        drive(-38*42, 38*42, 38*42, -38*42, .25);        //Move Backwords To Carasouel
+        drive(-38*43, 38*43, 38*43, -38*43, .25);        //Move Backwords To Carasouel
 
         drive(-38*10, -38*10, -38*10, -38*10, .25);
 
@@ -331,7 +331,7 @@ public class WebcamDetection extends LinearOpMode {
 
 
 
-        drive(-38*42, 38*42, 38*42, -38*42, .25);        //Move Backwords To Carasouel
+        drive(-38*43, 38*43, 38*43, -38*43, .25);        //Move Backwords To Carasouel
 
         drive(-38*10, -38*10, -38*10, -38*10, .25);
 
@@ -388,11 +388,11 @@ public class WebcamDetection extends LinearOpMode {
 
 
 
-        drive(-38*42, 38*42, 38*42, -38*42, .25);        //Move Backwords To Carasouel
+        drive(-38*43, 38*43, 38*43, -38*43, .25);        //Move Backwords To Carasouel
 
-        drive(-38*10, -38*10, -38*10, -38*10, .25);
+        drive(-38*15, -38*15, -38*15, -38*15, .4);
 
-        drive(38*40, 38*40, 38*40, 38*40, .25);
+        drive(38*50, 38*50, 38*50, 38*50, .25);
 
         claw.setPosition(0.0);
 
@@ -407,17 +407,9 @@ public class WebcamDetection extends LinearOpMode {
         movingClaw.setPower(.6);
         movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
-
         drive(38*30, 0, 0, 38*30, 6);        //Move Backwords To Carasouel
-
-
         drive(38*100, 38*100, 38*100, 38*100, 6);    //Move to Warehouse
-
-
-
-
     }
-
 }
 
 

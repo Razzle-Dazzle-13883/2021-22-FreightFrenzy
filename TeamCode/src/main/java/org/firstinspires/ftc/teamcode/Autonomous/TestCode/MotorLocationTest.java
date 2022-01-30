@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 @Autonomous(name = "MotorLocationTest")
+@Disabled
 
 public class MotorLocationTest extends LinearOpMode {
     private DcMotor rightFront;

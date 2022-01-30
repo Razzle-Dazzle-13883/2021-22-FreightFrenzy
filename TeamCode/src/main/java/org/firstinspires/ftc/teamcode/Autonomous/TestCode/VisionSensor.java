@@ -44,6 +44,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import java.util.List;
 
 @Autonomous(name = "VisionSensor", group = "Concept")
+@Disabled
 
 public class VisionSensor extends LinearOpMode {
 
