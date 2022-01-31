@@ -30,9 +30,7 @@
 package org.firstinspires.ftc.teamcode.Autonomous.Camera;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -45,8 +43,8 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
-@Autonomous(name = "WebcamDetection")
-public class WebcamDetection extends LinearOpMode {
+@Autonomous(name = "LessWebcamDetection")
+public class LessWebcamDetection extends LinearOpMode {
 
     private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/remoteEvent.tflite";
     private static final String[] LABELS = {
@@ -294,9 +292,8 @@ public class WebcamDetection extends LinearOpMode {
         movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
 
-        drive(38*100, 38*100, 38*100, 38*100, 1);        //Move Backwords To Carasouel
+        drive(38*100, 38*100, 38*100, 38*100, .4);        //Move Backwords To Carasouel
 
-        drive(38*30, 0, 0, 38*30, 1);
 
         stop();
 
@@ -359,9 +356,8 @@ public class WebcamDetection extends LinearOpMode {
         movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
 
-        drive(38*100, 38*100, 38*100, 38*100, 1);        //Move Backwords To Carasouel
+        drive(38*100, 38*100, 38*100, 38*100, .4);        //Move Backwords To Carasouel
 
-        drive(38*30, 0, 0, 38*30, 1);
 
         stop();
 
@@ -424,9 +420,8 @@ public class WebcamDetection extends LinearOpMode {
         movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
 
-        drive(38*100, 38*100, 38*100, 38*100, .8);        //Move Backwords To Carasouel
+        drive(38*100, 38*100, 38*100, 38*100, .4);        //Move Backwords To Carasouel
 
-        drive(38*30, 0, 0, 38*30, .8);        //Move Backwords To Carasouel
 
         stop();
 
