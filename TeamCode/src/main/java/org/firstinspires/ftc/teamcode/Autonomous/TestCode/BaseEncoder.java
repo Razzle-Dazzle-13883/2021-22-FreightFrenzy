@@ -17,10 +17,6 @@ public class BaseEncoder extends LinearOpMode {
      DcMotor leftBack;
      DcMotor rightBack;
 
-
-
-    //ENcoder Positions
-
      int leftFrontPos;
      int rightFrontPos;
      int leftBackPos;

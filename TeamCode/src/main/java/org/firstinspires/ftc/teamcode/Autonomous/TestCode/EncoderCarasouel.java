@@ -1,4 +1,5 @@
-package org.firstinspires.ftc.teamcode.Autonomous.SmallChassis.Red.Warehouse;
+package org.firstinspires.ftc.teamcode.Autonomous.TestCode;
+
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -6,20 +7,27 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "RedWarehouseS")
+@Autonomous(name = "CaraEncoder")
 @Disabled
-public class RedWarehouseS extends LinearOpMode {
+public class EncoderCarasouel extends LinearOpMode {
 
-     DcMotor leftFront;
-     DcMotor rightFront;
-     DcMotor leftBack;
-     DcMotor rightBack;
-     DcMotor spinMotor;
 
-     int leftFrontPos;
-     int rightFrontPos;
-     int leftBackPos;
-     int rightBackPos;
+    DcMotor leftFront;
+    DcMotor rightFront;
+    DcMotor leftBack;
+    DcMotor rightBack;
+    DcMotor spinMotor;
+
+
+
+    //ENcoder Positions
+
+    int leftFrontPos;
+    int rightFrontPos;
+    int leftBackPos;
+    int rightBackPos;
+    int spinMotorPos;
+
 
     @Override
     public void runOpMode() {
@@ -29,6 +37,9 @@ public class RedWarehouseS extends LinearOpMode {
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
 
+
+
+
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -36,29 +47,26 @@ public class RedWarehouseS extends LinearOpMode {
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        spinMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
+
+        //IN CASE A WHEEL OR MOTOR IS REVERSED USED THIS
+        //leftFront.setDirection((DcMotorSimple.Direction.REVERSE));
+
 
         leftFrontPos = 0;
         rightFrontPos = 0;
         leftBackPos = 0;
         rightBackPos = 0;
+        spinMotorPos = 0;
 
         waitForStart();
 
-        //moving to the side
-        drive(-38*24, 38*24, 38*24, -38*24, .3);
-        //up
-        drive(-38*15, -38*15, -38*15, -38*15, .3);
 
-        //ARM
+        carousel(360,1);
 
-        //move back a little
-        drive(38*5, 38*5, 38*5, 38*5, .3);
-        //rotate
-        drive(38*29, -38*29, 38*29, -38*29, .25);
-        //left
-        drive(38*10, -38*10, -38*10, 38*10, .25);
-        //to storage
-        drive(-38*72, -38*72, -38*72, -38*72, .3);
+        carousel(-360,1);
 
 
     }
@@ -87,5 +95,20 @@ public class RedWarehouseS extends LinearOpMode {
         while (opModeIsActive() && leftFront.isBusy() && rightFront.isBusy() && leftBack.isBusy() && rightBack.isBusy()) {
             idle();
         }
+
+
+    }
+
+    private void carousel(int spinMotorTarget, double speed  ) {
+        spinMotorPos += spinMotorTarget;
+        spinMotor.setTargetPosition(spinMotorPos);
+        spinMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        spinMotor.setPower(speed);
+        while (opModeIsActive() && spinMotor.isBusy()) {
+            idle();
+        }
+
+
     }
 }
+

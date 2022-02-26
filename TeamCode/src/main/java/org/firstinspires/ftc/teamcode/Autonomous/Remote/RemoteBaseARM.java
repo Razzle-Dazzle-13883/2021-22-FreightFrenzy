@@ -1,13 +1,14 @@
-package org.firstinspires.ftc.teamcode.Autonomous.SmallChassis.Blue.Duck;
+package org.firstinspires.ftc.teamcode.Autonomous.Remote;
+
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name = "BlueDuckSRemote")
+@Autonomous(name = "RemoteBaseARM")
+public class RemoteBaseARM extends LinearOpMode {
 
-public class BlueDuckHalf extends LinearOpMode {
 
      DcMotor leftFront;
      DcMotor rightFront;
@@ -20,6 +21,7 @@ public class BlueDuckHalf extends LinearOpMode {
      int leftBackPos;
      int rightBackPos;
 
+
     @Override
     public void runOpMode() {
         leftFront = hardwareMap.get(DcMotor.class, "leftFront");
@@ -28,13 +30,20 @@ public class BlueDuckHalf extends LinearOpMode {
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
 
-        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
+        //IN CASE A WHEEL OR MOTOR IS REVERSED USED THIS
+        //leftFront.setDirection((DcMotorSimple.Direction.REVERSE));
+
 
         leftFrontPos = 0;
         rightFrontPos = 0;
@@ -42,35 +51,32 @@ public class BlueDuckHalf extends LinearOpMode {
         rightBackPos = 0;
 
         waitForStart();
+        drive(-38*7, 38*7, 38*7, -38*7, .25);        //Move Backwords To Carasouel
+
+        drive(-38*30, -38*30, -38*30, -38*30, .15);        //Move Backwords To Carasouel
+
+        //drive(-38*2, -38*2, -38*2, 38*2, .25);        //Move Backwords To Carasouel
 
 
+        sleep(1000);
 
-        //38 ticks = 1 inch
+        spinMotor.setPower(-1);
+        sleep(4000);
 
-        //moving to the side (hub)
-        drive(38*24, -38*24, -38*24, 38*24, .45);
-        //Moving to the Hub
-        drive(-38*7, -38*7, -38*7, -38*7, .3);
-
-        //ARM
-
-        //Move Diagnolly onto wall and square against the wall
-        drive(38*0, 38*10, 38*10, 38*0, .6);
-        //move to carasouel
-        drive(-38*10, 38*10, 38*10, -38*10, .8);
-
-        //Rotate Carasouel
-        spinMotor.setPower(.70);
-        sleep(3500);
         spinMotor.setPower(0);
-        sleep(750);
+        sleep(500);
 
-        //turn  to face storage
-        drive(38*30, -38*30, 38*30, -38*30, .25);
-        //square agaisnt  the wall
-        drive(38*5, -38*5, -38*5, 38*5, .45);
-        //move into storage
-        drive(-38*80, -38*80, -38*80, -38*80, .3);
+
+
+        drive(-38*2, 38*2, 38*2, -38*2, .25);        //Move Backwords To Carasouel
+
+        drive(38*30, 38*30, 38*30, 38*30, .25);        //Move Backwords To Carasouel
+        drive(38*3, -38*3, -38*3, 38*7, .25);        //Move Backwords To Carasouel
+        drive(38*20, 0, 0, 38*20, .25);        //Move Backwords To Carasouel
+        drive(38*5, -38*5, -38*5, 38*5, .15);        //Move Backwords To Carasouel
+
+        drive(38*100, 38*100, 38*100, 38*100, .35);    //Move to Warehouse
+
 
     }
 
@@ -98,5 +104,8 @@ public class BlueDuckHalf extends LinearOpMode {
         while (opModeIsActive() && leftFront.isBusy() && rightFront.isBusy() && leftBack.isBusy() && rightBack.isBusy()) {
             idle();
         }
+
+
     }
 }
+

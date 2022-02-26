@@ -1,15 +1,14 @@
-package org.firstinspires.ftc.teamcode.Autonomous.BigChassis.Red;
+package org.firstinspires.ftc.teamcode.Autonomous.Remote;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "RedWarehouse")
-@Disabled
-public class RedWarehouse extends LinearOpMode {
+@Autonomous(name = "RemoteBaseARMPOS")
+public class RemoteBaseARMPOS extends LinearOpMode {
 
 
      DcMotor leftFront;
@@ -17,15 +16,14 @@ public class RedWarehouse extends LinearOpMode {
      DcMotor leftBack;
      DcMotor rightBack;
      DcMotor spinMotor;
-
-
-
-    //ENcoder Positions
+     DcMotor movingClaw;
+     Servo claw;
 
      int leftFrontPos;
      int rightFrontPos;
      int leftBackPos;
      int rightBackPos;
+     int spinMotorPos;
 
 
     @Override
@@ -35,15 +33,20 @@ public class RedWarehouse extends LinearOpMode {
         leftBack = hardwareMap.get(DcMotor.class, "leftBack");
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         spinMotor = hardwareMap.get(DcMotor.class, "spinMotor");
+        movingClaw = hardwareMap.get(DcMotor.class, "movingClaw");
 
 
-        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        claw = hardwareMap.get(Servo.class, "claw");
+        claw.setPosition(.9);
+
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        movingClaw.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
         //IN CASE A WHEEL OR MOTOR IS REVERSED USED THIS
@@ -57,18 +60,57 @@ public class RedWarehouse extends LinearOpMode {
 
         waitForStart();
 
+        movingClaw.setTargetPosition(-70);
+        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movingClaw.setPower(.2);
 
-        //drive(1000, 1000, -1000, 1000, 0.25);
-        // the first number will move the leftfront wheel 1000 ticks, the 2nd will move the righfront wheel backwards 100 ticks, and so on
-        //the last number, (0.25 in this case) will make them move at a speed of 0.25
+        movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        sleep(1000);
+
+        drive(-38*7, 38*7, 38*7, -38*7, .25);        //Move Backwords To Carasouel
+
+        drive(-38*30, -38*30, -38*30, -38*30, .15);        //Move Backwords To Carasouel
+
+        //drive(-38*2, -38*2, -38*2, 38*2, .25);        //Move Backwords To Carasouel
 
 
-        //1 inch is 38
+        sleep(1000);
 
-        //turning
-        drive(-38*14, -38*14, -38*14, -38*14, .25);
-        drive(-38*26, 38*26, -38*26, 38*26, .15);
-        drive(-38*60, -38*60, -38*60, -38*60, 1);
+        spinMotor.setPower(-1);
+        sleep(4000);
+
+        spinMotor.setPower(0);
+        sleep(500);
+
+
+
+        drive(-38*42, 38*42, 38*42, -38*42, .25);        //Move Backwords To Carasouel
+
+        drive(-38*10, -38*10, -38*10, -38*10, .25);
+
+        drive(38*40, 38*40, 38*40, 38*40, .25);
+
+        claw.setPosition(0.0);
+
+        sleep(2000);
+
+        drive(-38*15, -38*15, -38*15, -38*15, .25);        //Move Backwords To Carasouel
+
+        drive(38*50, -38*50, -38*50, 38*50, .25);
+
+        movingClaw.setTargetPosition(0);
+        movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movingClaw.setPower(.35);
+        movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+
+        drive(38*30, 0, 0, 38*30, .25);        //Move Backwords To Carasouel
+
+
+        drive(38*100, 38*100, 38*100, 38*100, .35);    //Move to Warehouse
+
+
     }
 
     private void drive(int leftFrontTarget, int rightFrontTarget, int leftBackTarget, int rightBackTarget, double speed  ) {
