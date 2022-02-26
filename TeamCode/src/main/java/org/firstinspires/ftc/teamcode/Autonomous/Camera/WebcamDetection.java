@@ -46,6 +46,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import java.util.List;
 
 @Autonomous(name = "WebcamDetection")
+@Disabled
 public class WebcamDetection extends LinearOpMode {
 
     private static final String TFOD_MODEL_ASSET = "/sdcard/FIRST/tflitemodels/remoteEvent.tflite";

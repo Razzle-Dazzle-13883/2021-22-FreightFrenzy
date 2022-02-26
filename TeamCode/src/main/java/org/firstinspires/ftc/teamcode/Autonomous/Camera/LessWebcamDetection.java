@@ -261,6 +261,7 @@ public class LessWebcamDetection extends LinearOpMode {
 
         //drive(-38*2, -38*2, -38*2, 38*2, .25);        //Move Backwords To Carasouel
 
+        drive(38*2, -38*2, -38*2, 38*7, .3);        //Move Backwords To Carasouel
 
         sleep(1000);
 
@@ -292,7 +293,7 @@ public class LessWebcamDetection extends LinearOpMode {
         movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
 
-        drive(38*100, 38*100, 38*100, 38*100, .4);        //Move Backwords To Carasouel
+        drive(38*115, 38*115, 38*115, 38*115, .4);        //Move Backwords To Carasouel
 
 
         stop();
@@ -325,6 +326,8 @@ public class LessWebcamDetection extends LinearOpMode {
 
         //drive(-38*2, -38*2, -38*2, 38*2, .25);        //Move Backwords To Carasouel
 
+        drive(38*2, -38*2, -38*2, 38*7, .3);        //Move Backwords To Carasouel
+
 
         sleep(1000);
 
@@ -356,7 +359,7 @@ public class LessWebcamDetection extends LinearOpMode {
         movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
 
-        drive(38*100, 38*100, 38*100, 38*100, .4);        //Move Backwords To Carasouel
+        drive(38*115, 38*115, 38*115, 38*115, .4);        //Move Backwords To Carasouel
 
 
         stop();
@@ -389,6 +392,8 @@ public class LessWebcamDetection extends LinearOpMode {
 
         //drive(-38*2, -38*2, -38*2, 38*2, .25);        //Move Backwords To Carasouel
 
+        drive(38*2, -38*2, -38*2, 38*7, .3);        //Move Backwords To Carasouel
+
 
         sleep(1000);
 
@@ -420,7 +425,7 @@ public class LessWebcamDetection extends LinearOpMode {
         movingClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
 
-        drive(38*100, 38*100, 38*100, 38*100, .4);        //Move Backwords To Carasouel
+        drive(38*115, 38*115, 38*115, 38*115, .4);        //Move Backwords To Carasouel
 
 
         stop();

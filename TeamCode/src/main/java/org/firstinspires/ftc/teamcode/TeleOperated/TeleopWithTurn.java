@@ -3,14 +3,13 @@ package org.firstinspires.ftc.teamcode.TeleOperated;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-@TeleOp(name="MAINTeleop")
-public class MechanumTeleop extends OpMode {
+@TeleOp(name="TurnTeleop")
+public class TeleopWithTurn extends OpMode {
 
     //motors
     DcMotor leftFront = null;
@@ -44,7 +43,10 @@ public class MechanumTeleop extends OpMode {
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
         leftFront.setPower(0);
@@ -70,10 +72,10 @@ public class MechanumTeleop extends OpMode {
         double y = -gamepad1.left_stick_x;
         double r = -gamepad1.right_stick_x;
         if (turboMode) {
-            leftFront.setPower((x + y + r) / 2);
-            leftBack.setPower((x - y - r) /2);
-            rightFront.setPower((x - y + r) /2 );
-            rightBack.setPower((x + y - r)  /2);
+            leftFront.setPower((x + y + r) / 2.5);
+            leftBack.setPower((x - y - r) / 2.5);
+            rightFront.setPower((x - y + r) / 2.5);
+            rightBack.setPower((x + y + r) / 2.5);
         } else {
             leftFront.setPower((x + y + r) / 3.7);
             leftBack.setPower((x - y + r) / 3.7);
@@ -112,16 +114,33 @@ public class MechanumTeleop extends OpMode {
         } else if (gamepad2.dpad_down) {
             movingClaw.setPower(0);
         } else if (gamepad2.dpad_left) {
-            movingClaw.setTargetPosition(-75);
+            movingClaw.setTargetPosition(75);
             movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            movingClaw.setPower(.2);
+            movingClaw.setPower(.4);
         } else if (gamepad2.dpad_right) {
-            movingClaw.setTargetPosition(-35);
+            movingClaw.setTargetPosition(35);
             movingClaw.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            movingClaw.setPower(.2);
+            movingClaw.setPower(.4);
         }
 
+        if (gamepad1.right_bumper) {
+            leftFront.setTargetPosition(-38*50);
+            leftBack.setTargetPosition(-38*50);
+            rightFront.setTargetPosition(38*50);
+            rightBack.setTargetPosition(38*50);
+            leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            movingClaw.setPower(.4);
 
+        }
+        if (gamepad1.left_bumper) {
+            leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+        }
     }
 }
